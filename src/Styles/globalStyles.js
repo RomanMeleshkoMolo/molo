@@ -4,7 +4,8 @@ const variables = {
   primaryColor: '#f0f0f0',
   textColor: '#000',
   iconColor: "#000",
-  padding: 20
+  padding: 20,
+  backgroundColor: "#d9dcd6"
 };
 
 const globalStyles = StyleSheet.create({
@@ -19,14 +20,17 @@ const globalStyles = StyleSheet.create({
   },
   globalIcon: {
     marginRight: 10,
-    color: variables.iconColor, // Цвет иконки
+    color: variables.iconColor,
   },
   globalBtnText: {
-    fontSize: 16,
-    fontFamily: 'honk-regular',
-
-    color: variables.textColor, // Цвет текста
+    fontSize: 14,
+    fontFamily: 'Montserrat-Bold',
+    color: variables.textColor,
   },
+  globalBackground: {
+    backgroundColor: variables.backgroundColor
+  }
+
 });
 
 export { globalStyles, variables };

@@ -27,7 +27,6 @@
     "react-native-gesture-handler": "^2.24.0",
     "react-native-image-picker": "^8.2.0",
     "react-native-paper": "^5.13.1",
-    "react-native-pjsip": "https://github.com/datso/react-native-pjsip.git",
     "react-native-reanimated": "^3.17.5",
     "react-native-safe-area-context": "^5.2.0",
     "react-native-screens": "^4.9.1",
