@@ -65,6 +65,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
+import {Provider} from "react-native-paper";
+
 
 // Pages
 import Login from "./src/Pages/Login/Login";
@@ -73,36 +75,53 @@ import Account from "./src/Pages/Account";
 import MainNavi from "./src/Pages/MainNavi";
 import Information from "./src/Pages/Information";
 
+import UserConditionInfo from "./src/Pages/Login/UserConditionInfo";
+import UserPoliticoInfo from "./src/Pages/Login/UserPoliticoInfo";
+
 enableScreens();
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen
-              name="Phone"
-              component={Phone}
-            />
-            <Stack.Screen
-              name="MainNavi"
-              component={MainNavi}
-              options={{title: ""}}
-            />
-            <Stack.Screen
-              name="Account"
-              component={Account}
-            />
-            <Stack.Screen
-              name="Information"
-              component={Information}
-            />
+     <Provider>
+        <SafeAreaProvider>
+           <NavigationContainer>
+              <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+              <Stack.Screen
+                  name="Login"
+                  component={Login}
+              />
+              <Stack.Screen
+                name="Phone"
+                component={Phone}
+              />
+              <Stack.Screen
+                name="MainNavi"
+                component={MainNavi}
+                options={{title: ""}}
+              />
+              <Stack.Screen
+                name="Account"
+                component={Account}
+              />
+              <Stack.Screen
+                name="Information"
+                component={Information}
+              />
+              <Stack.Screen
+                 name="UserConditionInfo"
+                 component={UserConditionInfo}
+              />
+              <Stack.Screen
+                 name="UserPoliticoInfo"
+                 component={UserPoliticoInfo}
+              />
           </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
+          </NavigationContainer>
+        </SafeAreaProvider>
+     </Provider>
+
   );
 }
 

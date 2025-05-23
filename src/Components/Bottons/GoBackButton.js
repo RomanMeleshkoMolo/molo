@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Button, TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
+import { StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const GoBackButton = () => {
@@ -8,7 +8,7 @@ const GoBackButton = () => {
     return (
         <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
             <Image
-              source={require('../../assets/back-button.png')}
+              source={require('../../../assets/back-button.png')}
               style={styles.imageIcon}
             />
         </TouchableWithoutFeedback>

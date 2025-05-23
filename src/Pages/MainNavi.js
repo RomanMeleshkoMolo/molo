@@ -9,9 +9,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // Pages
 import Phone from "./Phone";
-import Contacts from "./Contacts";
+// import Contacts from "./Contacts";
 import LastCalls from "./LastCalls";
-import ContactsPhone from "./ContactsPhone";
+// import ContactsPhone from "./ContactsPhone";
 import Account from "./Account";
 
 const Tab = createBottomTabNavigator();
@@ -59,16 +59,16 @@ function MainNavi() {
              component={LastCalls}
              options={{ title: 'Calls', headerShown: false }}
           />
-          <Tab.Screen
-             name="ContactsPhone"
-             component={ContactsPhone}
-             options={{ title: 'Contacts Phone', headerShown: false }}
-          />
-          <Tab.Screen
-             name="Contacts"
-             component={Contacts}
-             options={{ headerShown: false }}
-          />
+          {/*<Tab.Screen*/}
+          {/*   name="ContactsPhone"*/}
+          {/*   component={ContactsPhone}*/}
+          {/*   options={{ title: 'Contacts Phone', headerShown: false }}*/}
+          {/*/>*/}
+          {/*<Tab.Screen*/}
+          {/*   name="Contacts"*/}
+          {/*   component={Contacts}*/}
+          {/*   options={{ headerShown: false }}*/}
+          {/*/>*/}
           {/*<Tab.Screen*/}
           {/*   name="Account"*/}
           {/*   component={Account}*/}
