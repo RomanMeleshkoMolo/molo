@@ -7,12 +7,14 @@ import GoBackButton from "../../Components/Bottons/GoBackButton";
 // Connect Global Styles
 import { globalStyles } from "../../Styles/globalStyles";
 
-const UserPoliticoInfo = () => {
+const UserPoliticoInfo = ({ navigation }) => {
   return (
      <View style={[styles.container, globalStyles.globalBackground]}>
 
         <View style={styles.header}>
-            <GoBackButton></GoBackButton>
+            <GoBackButton
+               navigation={navigation}
+            ></GoBackButton>
         </View>
 
         <ScrollView style={styles.containerInfo}>

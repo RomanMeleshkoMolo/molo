@@ -77,6 +77,8 @@ import Information from "./src/Pages/Information";
 
 import UserConditionInfo from "./src/Pages/Login/UserConditionInfo";
 import UserPoliticoInfo from "./src/Pages/Login/UserPoliticoInfo";
+import LoginEmail from "./src/Pages/Login/LoginEmail";
+import LoginPhone from "./src/Pages/Login/LoginPhone";
 
 enableScreens();
 
@@ -116,6 +118,14 @@ function App() {
               <Stack.Screen
                  name="UserPoliticoInfo"
                  component={UserPoliticoInfo}
+              />
+              <Stack.Screen
+                 name="LoginEmail"
+                 component={LoginEmail}
+              />
+              <Stack.Screen
+                 name="LoginPhone"
+                 component={LoginPhone}
               />
           </Stack.Navigator>
           </NavigationContainer>

@@ -29,11 +29,13 @@ const Login = ({ navigation }) => {
 
 
  const handleCreateAccountEmail = () => {
-    Alert.alert("Go to Eamil page");
+    // Alert.alert("Go to Eamil page");
+     navigation.navigate('LoginEmail');
  };
 
  const handleCreateAccountPhone = () => {
-     Alert.alert("Go to Phone page");
+     // Alert.alert("Go to Phone page");
+     navigation.navigate('LoginPhone');
  }
 
  return (
@@ -44,15 +46,19 @@ const Login = ({ navigation }) => {
        ></Logo>
 
        <ButtonNameIcon
+           leftIcon="true"
            iconBtn="mail-outline"
+           disable={false}
            buttonText="Продолжить по email"
-           handleCreateAccount={handleCreateAccountEmail}
+           handle={handleCreateAccountEmail}
        ></ButtonNameIcon>
 
        <ButtonNameIcon
+           leftIcon="true"
            iconBtn="call-outline"
+           disable={false}
            buttonText="Продолжить по телефону"
-           handleCreateAccount={handleCreateAccountPhone}
+           handle={handleCreateAccountPhone}
        ></ButtonNameIcon>
 
        <InfoUserLogin navigation={navigation}></InfoUserLogin>

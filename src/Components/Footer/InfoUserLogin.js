@@ -1,26 +1,3 @@
-// import React from "react";
-// import { ScrollView, StyleSheet, View, Text,} from 'react-native';
-//
-// const InfoUserLogin = ({ navigation }) => {
-//
-//     return (
-//
-//        <View style={styles.footerLogin}>
-//           <Text style={styles.footerInfoOne}>Мы не передаем твои данные без твоего разрешения</Text>
-//           <Text style={styles.footerInfoTwo}>Создавая аккаунт, ты соглашаешься с нашими
-//              <Text style={styles.userConditionInfo}> Условиями пользования</Text> и
-//              <Text style={styles.userConditionInfo}> Политикой конфиденциальности</Text>
-//           </Text>
-//        </View>
-//
-//     )
-//
-// };
-
-
-
-
-
 import React, { useState } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
