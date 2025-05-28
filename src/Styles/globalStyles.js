@@ -19,17 +19,24 @@ const globalStyles = StyleSheet.create({
     marginVertical: 10,
   },
   globalIcon: {
-    marginRight: 10,
+    // marginRight: 10,
     color: variables.iconColor,
   },
   globalBtnText: {
     fontSize: 14,
+    marginHorizontal: 10,
     fontFamily: 'Montserrat-Bold',
     color: variables.textColor,
   },
   globalBackground: {
     backgroundColor: variables.backgroundColor
-  }
+  },
+  globalInput: {
+    backgroundColor: variables.backgroundColor,
+  },
+  disabledBtn: {
+        opacity: 0.5,
+    },
 
 });
 
