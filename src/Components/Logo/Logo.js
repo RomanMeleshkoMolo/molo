@@ -1,4 +1,7 @@
-import {StyleSheet, View, Image,} from 'react-native';
+import { View, Image } from 'react-native';
+
+// Connect styles
+import styles from "./styles/Logo.scss";
 
 const Logo = ({  logoName, navigation }) => {
 
@@ -20,22 +23,5 @@ const Logo = ({  logoName, navigation }) => {
     )
 
 };
-
-const styles = StyleSheet.create({
-
- // Logo
-  logo: {
-      width: 170,
-      height: 170,
-      marginBottom: 40,
-      borderRadius: 20
-  },
-  headerLogo: {
-      display: 'flex',
-      justifyContent: "center",
-      alignItems: "center",
-  },
-
-})
 
 export default Logo;

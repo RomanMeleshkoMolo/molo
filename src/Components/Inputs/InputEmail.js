@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, TextInput, Animated, TouchableOpacity } from 'react-native';
 
 // Connect styles
-import styles from "./styles/Input.scss";
+import styles from "./styles/InputEmail.scss";
 
-const Input = ({ placeholder, onValidEmail }) => {
+const InputEmail = ({ placeholder, onValidEmail }) => {
   const [text, setText] = React.useState('');
   const [error, setError] = React.useState(false);
   const [showSuggestion, setShowSuggestion] = React.useState(false);
@@ -82,7 +82,6 @@ const Input = ({ placeholder, onValidEmail }) => {
              value={text}
              maxLength={30}
              onChangeText={handleChangeText}
-             onBlur={() => validateInput(text)}
              keyboardType="email-address"
              autoFocus={true}
            />
@@ -99,5 +98,5 @@ const Input = ({ placeholder, onValidEmail }) => {
   );
 };
 
-export default Input;
+export default InputEmail;
 
