@@ -5,60 +5,10 @@
  * @format
  */
 
-// import React from 'react';
-// import {
-//   ScrollView,
-//   StatusBar,
-//   StyleSheet,
-//   Text,
-//   useColorScheme,
-//   View,
-// } from 'react-native';
-//
-// import {
-//   Colors,
-//   DebugInstructions,
-//   Header,
-//   LearnMoreLinks,
-//   ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
-//
-// import { NavigationContainer } from '@react-navigation/native';
-//
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// const Stack = createNativeStackNavigator();
-// import { enableScreens } from 'react-native-screens';
-// enableScreens();
-//
-// import Login from "./src/Pages/Login";
-//
-// function App() {
-//
-//   return (
-//
-//       <NavigationContainer>
-//         <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-//           <Stack.Screen
-//            name="Login"
-//            component={Login}
-//            />
-//
-//         </Stack.Navigator>
-//       </NavigationContainer>
-//   );
-// }
-//
-// const styles = StyleSheet.create({
-//
-// });
-//
-// export default App;
-
-
-
-
-
-
+ /**
+ * © [2025] Molo. All rights reserved.
+ * Molo is a private development, and all rights are owned by the app's owner.
+ */
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -69,16 +19,17 @@ import {Provider} from "react-native-paper";
 
 
 // Pages
-import Login from "./src/Pages/Login/Login";
 import Phone from "./src/Pages/Phone";
 import Account from "./src/Pages/Account";
 import MainNavi from "./src/Pages/MainNavi";
 import Information from "./src/Pages/Information";
 
+import Login from "./src/Pages/Login/Login";
 import UserConditionInfo from "./src/Pages/Login/UserConditionInfo";
 import UserPoliticoInfo from "./src/Pages/Login/UserPoliticoInfo";
 import LoginEmail from "./src/Pages/Login/LoginEmail";
 import LoginPhone from "./src/Pages/Login/LoginPhone";
+import CountryCodeSelector from "./src/Pages/Login/CountryCodeSelector";
 
 enableScreens();
 
@@ -126,6 +77,10 @@ function App() {
               <Stack.Screen
                  name="LoginPhone"
                  component={LoginPhone}
+              />
+              <Stack.Screen
+                 name="CountryCodeSelector"
+                 component={CountryCodeSelector}
               />
           </Stack.Navigator>
           </NavigationContainer>

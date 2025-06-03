@@ -1,25 +1,24 @@
 import React from 'react';
-import { StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
+// Connect styles
+import style from "./styles/GoBackButton.scss";
+
 const GoBackButton = ({ navigation }) => {
-    // const navigation = useNavigation();
 
-    const goLoginPage = () => {
-       // navigation.navigate('Login');
-        navigation.reset({
-         index: 0,
-         routes: [{ name: 'Login' }],
-    })
-    }
+  const goLoginPage = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
+  };
 
-    return (
-        <TouchableWithoutFeedback onPress={goLoginPage}>
-            <Icon name={'arrow-back-outline'} size={30}></Icon>
-        </TouchableWithoutFeedback>
-    )
-
-}
+  return (
+    <TouchableOpacity onPress={goLoginPage} style={style.button}>
+      <Icon name={'arrow-back-outline'} size={30} />
+    </TouchableOpacity>
+  );
+};
 
 export default GoBackButton;

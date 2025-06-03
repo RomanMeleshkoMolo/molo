@@ -1,0 +1,35 @@
+.wrapperUser {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.footerLogin {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.footerInfoOne {
+  text-align: center;
+  margin: 5px 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 13px;
+  font-family: 'Montserrat-Regular';
+}
+
+.footerInfoTwo {
+  text-align: center;
+  margin: 5px 0;
+  font-size: 13px;
+  font-family: 'Montserrat-Regular';
+}
+
+.userConditionInfo {
+  font-family: 'Montserrat-Bold';
+  text-decoration: underline;
+}

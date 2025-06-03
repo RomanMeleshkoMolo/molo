@@ -1,15 +1,19 @@
+/**
+ * © [2025] Molo. All rights reserved.
+ * Molo is a private development, and all rights are owned by the app's owner.
+ */
+
 import React from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import { View, Text, ScrollView} from 'react-native';
 
 // Connect components
 import GoBackButton from "../../Components/Bottons/GoBackButton";
 
-// Connect Global Styles
-import { globalStyles } from "../../Styles/globalStyles";
+import styles from "./styles/UserPoliticoInfo.scss";
 
 const UserPoliticoInfo = ({ navigation }) => {
   return (
-     <View style={[styles.container, globalStyles.globalBackground]}>
+     <View style={[styles.container]}>
 
         <View style={styles.header}>
             <GoBackButton
@@ -286,40 +290,5 @@ const UserPoliticoInfo = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
-  },
-  containerInfo: {
-    padding: 10
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    textAlign: "center"
-  },
-  paragraph: {
-    fontSize: 16,
-    marginBottom: 10,
-    fontFamily: 'Montserrat-Medium',
-  },
-  paragraphNumber: {
-    fontFamily: 'Montserrat-Bold',
-  },
-  bullet: {
-    fontSize: 16,
-    marginLeft: 20,
-    marginBottom: 5,
-    fontFamily: 'Montserrat-SemiBold',
-  },
-  link: {
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
-});
 
 export default UserPoliticoInfo;

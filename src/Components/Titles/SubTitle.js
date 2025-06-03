@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 
-// Connect Global Styles
-import { globalStyles } from "../../Styles/globalStyles";
+// Connect styles
+import styles from "./styles/SubTitle.scss";
 
 const SubTitle = ({ children } ) => {
 
@@ -16,18 +16,5 @@ const SubTitle = ({ children } ) => {
       </View>
    );
 }
-
-const styles = StyleSheet.create({
-
-  title: {
-      fontSize: 12,
-      fontFamily: "Montserrat-Regular",
-      textAlign: "center",
-      padding: 10,
-      color: "#565656"
-  }
-
-})
-
 
 export default SubTitle;

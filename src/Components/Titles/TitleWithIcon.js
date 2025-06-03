@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 
-// Connect Global Styles
-import { globalStyles } from "../../Styles/globalStyles";
+// Connect styles
+import styles from "./styles/TitleWithIcon.scss";
 
 // Connect Components
 import Icon from "react-native-vector-icons/Ionicons";
@@ -20,22 +20,5 @@ const TitleWithIcon = ({ children, nameIcon }) => {
       </View>
    );
 }
-
-const styles = StyleSheet.create({
-
-  footerInfo: {
-     flexDirection: 'row',
-     alignItems: 'center',
-     paddingHorizontal: 20,
-  },
-  footerText: {
-     textAlign: "center",
-     paddingHorizontal: 20,
-     fontSize: 12,
-     fontFamily: "Montserrat-Regular"
-  }
-
-})
-
 
 export default TitleWithIcon;
