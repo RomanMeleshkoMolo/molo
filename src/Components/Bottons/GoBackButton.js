@@ -7,15 +7,19 @@ import style from "./styles/GoBackButton.scss";
 
 const GoBackButton = ({ navigation }) => {
 
-  const goLoginPage = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
+  // const goLoginPage = () => {
+  //   navigation.reset({
+  //     index: 0,
+  //     routes: [{ name: 'Login' }],
+  //   });
+  // };
+
+  const goBack = () => {
+    navigation.goBack();
   };
 
   return (
-    <TouchableOpacity onPress={goLoginPage} style={style.button}>
+    <TouchableOpacity onPress={goBack} style={style.button}>
       <Icon name={'arrow-back-outline'} size={30} />
     </TouchableOpacity>
   );
