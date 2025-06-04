@@ -18,10 +18,15 @@ import style from "./styles/LoginPhone.scss";
 
 const LoginPhone = ({ navigation }) => {
   const [text, setText] = React.useState('');
+  const [isPhoneValid, setIsPhoneValid] = React.useState(false);
 
   const goToVerification = () => {
        navigation.navigate('LoginEmail');
   }
+
+  const handlePhoneNumber = ( isValid ) => {
+      setIsPhoneValid(isValid);
+  };
 
   return (
      <View style={[style.container]}>
@@ -37,6 +42,7 @@ const LoginPhone = ({ navigation }) => {
 
         <InputPhone
            style={[style.input]}
+            onPhoneNumber={handlePhoneNumber}
         ></InputPhone>
 
         <ButtonNameIcon
@@ -53,7 +59,7 @@ const LoginPhone = ({ navigation }) => {
 
            <ButtonNameIcon
               buttonText="Дальше"
-              disable={true}
+              disable={!isPhoneValid}
            ></ButtonNameIcon>
         </View>
 

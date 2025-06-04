@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import {View, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+// Connect Components
+import ModalError from "../Modals/ModalError";
+import ModalSuccess from "../Modals/ModalSuccess";
+import ModalWarning from "../Modals/ModalWarning";
+
 // Connect styles
 import styles from "./styles/InputPhone.scss";
 
-const InputPhone = ({ style }) => {
+const InputPhone = ({ style, onPhoneNumber }) => {
   const [countryCode, setCountryCode] = useState('+380');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [showError, setShowError] = useState(false);
   const navigation = useNavigation();
 
   const handleCountryCodePress = () => {
@@ -18,10 +24,15 @@ const InputPhone = ({ style }) => {
 
   const handlePhoneNumberChange = (text) => {
      if (text.length > 20) {
-      Alert.alert('Warning', 'Phone number cannot exceed 20 characters.');
-    } else {
-      setPhoneNumber(text);
-    }
+       setShowError(true);
+       return;
+     }
+
+     setShowError(false);
+     setPhoneNumber(text);
+     if (onPhoneNumber) {
+       onPhoneNumber(text.length > 7);
+     }
   };
 
   return (
@@ -41,6 +52,12 @@ const InputPhone = ({ style }) => {
            onChangeText={handlePhoneNumberChange}
            autoFocus={true}
         />
+        {showError && (
+         <ModalError
+            message="Номер не должен превышать 20 символов"
+            onHide={() => setShowError(false)}
+         />
+      )}
      </View>
   );
 };
