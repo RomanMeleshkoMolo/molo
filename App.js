@@ -30,6 +30,7 @@ import UserPoliticoInfo from "./src/Pages/Login/UserPoliticoInfo";
 import LoginEmail from "./src/Pages/Login/LoginEmail";
 import LoginPhone from "./src/Pages/Login/LoginPhone";
 import CountryCodeSelector from "./src/Pages/Login/CountryCodeSelector";
+import VerificationEmail from "./src/Pages/Login/VerificationEmail";
 
 enableScreens();
 
@@ -81,6 +82,10 @@ function App() {
               <Stack.Screen
                  name="CountryCodeSelector"
                  component={CountryCodeSelector}
+              />
+              <Stack.Screen
+                 name="VerificationEmail"
+                 component={VerificationEmail}
               />
           </Stack.Navigator>
           </NavigationContainer>

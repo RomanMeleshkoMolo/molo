@@ -4,7 +4,7 @@ import { View, Text, TextInput, Animated, TouchableOpacity } from 'react-native'
 // Connect styles
 import styles from "./styles/InputEmail.scss";
 
-const InputEmail = ({ placeholder, onValidEmail }) => {
+const InputEmail = ({ placeholder, onValidEmail, onChangeText }) => {
   const [text, setText] = React.useState('');
   const [error, setError] = React.useState(false);
   const [showSuggestion, setShowSuggestion] = React.useState(false);
@@ -70,6 +70,10 @@ const InputEmail = ({ placeholder, onValidEmail }) => {
 
      if (onValidEmail) {
        onValidEmail( isValidEmail );
+     }
+
+     if (onChangeText) {
+       onChangeText(input); // Добавьте это
      }
   };
 
