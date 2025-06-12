@@ -7,12 +7,12 @@ import React from 'react';
 import { View } from 'react-native';
 
 // Connect components
-import GoBackButton from "../../Components/Bottons/GoBackButton";
-import Title from "../../Components/Titles/Title";
-import SubTitle from "../../Components/Titles/SubTitle";
-import ButtonNameIcon from "../../Components/Bottons/ButtonNameIcon";
-import TitleWithIcon from "../../Components/Titles/TitleWithIcon";
-import InputPhone from "../../Components/Inputs/InputPhone";
+import GoBackButton from "Components/Buttons/GoBackButton";
+import Title from "Components/Titles/Title";
+import SubTitle from "Components/Titles/SubTitle";
+import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
+import TitleWithIcon from "Components/Titles/TitleWithIcon";
+import InputPhone from "Components/Inputs/InputPhone";
 
 import style from "./styles/LoginPhone.scss";
 

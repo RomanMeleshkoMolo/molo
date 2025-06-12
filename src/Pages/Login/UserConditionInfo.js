@@ -7,7 +7,7 @@ import React from 'react';
 import { View, Text, ScrollView, Linking} from 'react-native';
 
 // Connect components
-import GoBackButton from "../../Components/Bottons/GoBackButton";
+import GoBackButton from "Components/Buttons/GoBackButton";
 
 import style from "./styles/UserConditionInfo.scss";
 

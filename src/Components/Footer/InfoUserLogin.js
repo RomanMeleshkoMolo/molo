@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 // Connect Navigator
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 
 import styles from "./styles/InfoUserLogin.scss";
 
