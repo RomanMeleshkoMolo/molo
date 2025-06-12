@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { View, Alert, Text, ActivityIndicator } from 'react-native';
 
 // Connect components
-import GoBackButton from "../../Components/Bottons/GoBackButton";
-import Title from "../../Components/Titles/Title";
-import SubTitle from "../../Components/Titles/SubTitle";
-import ButtonNameIcon from "../../Components/Bottons/ButtonNameIcon";
-import Input from "../../Components/Inputs/Input";
+import GoBackButton from "Components/Buttons/GoBackButton";
+import Title from "Components/Titles/Title";
+import SubTitle from "Components/Titles/SubTitle";
+import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
+import Input from "Components/Inputs/Input";
 
 // Connect styles
 import styles from "./styles/VerificationEmail.scss";

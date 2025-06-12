@@ -7,10 +7,10 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 
 // Connect Components
-import ButtonNameIcon from "../../Components/Bottons/ButtonNameIcon";
-import Logo from "../../Components/Logo/Logo";
-import InfoUserLogin from "../../Components/Footer/InfoUserLogin";
-import Bubble from "../../Components/Effects/Bubble"
+import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
+import Logo from "Components/Logo/Logo";
+import InfoUserLogin from "Components/Footer/InfoUserLogin";
+import Bubble from "Components/Effects/Bubble"
 
 // Connect styles
 import style from "./styles/Login.scss";
