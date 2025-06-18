@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-import {View, TextInput, TouchableOpacity, Alert} from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // Connect Components
 import ModalError from "../Modals/ModalError";
-import ModalSuccess from "../Modals/ModalSuccess";
-import ModalWarning from "../Modals/ModalWarning";
 
 // Connect styles
 import styles from "./styles/InputPhone.scss";
 
-const InputPhone = ({ style, onPhoneNumber }) => {
+const InputPhone = ({ style, onPhoneNumber, onChangeText }) => {
   const [countryCode, setCountryCode] = useState('+380');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showError, setShowError] = useState(false);
@@ -22,16 +20,23 @@ const InputPhone = ({ style, onPhoneNumber }) => {
      });
   };
 
-  const handlePhoneNumberChange = (text) => {
-     if (text.length > 20) {
+  const handlePhoneNumberChange = (input) => {
+     if (input.length > 20) {
        setShowError(true);
        return;
      }
 
      setShowError(false);
-     setPhoneNumber(text);
+     setPhoneNumber(input);
+
+     const fullNumber = `${countryCode}${input}`;
+
      if (onPhoneNumber) {
-       onPhoneNumber(text.length > 7);
+       onPhoneNumber(fullNumber.length > 7);
+     }
+
+     if (onChangeText) {
+       onChangeText(fullNumber);
      }
   };
 
@@ -42,7 +47,7 @@ const InputPhone = ({ style, onPhoneNumber }) => {
               style={[styles.input]}
               value={countryCode}
               editable={false}
-           />
+            />
         </TouchableOpacity>
         <TextInput
            style={[styles.input]}
@@ -63,3 +68,4 @@ const InputPhone = ({ style, onPhoneNumber }) => {
 };
 
 export default InputPhone;
+

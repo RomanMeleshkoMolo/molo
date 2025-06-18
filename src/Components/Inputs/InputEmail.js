@@ -4,7 +4,7 @@ import { View, Text, TextInput, Animated, TouchableOpacity } from 'react-native'
 // Connect styles
 import styles from "./styles/InputEmail.scss";
 
-const InputEmail = ({ placeholder, onValidEmail, onChangeText }) => {
+const InputEmail = ({ style, placeholder, onValidEmail, onChangeText }) => {
   const [text, setText] = React.useState('');
   const [error, setError] = React.useState(false);
   const [showSuggestion, setShowSuggestion] = React.useState(false);
@@ -78,7 +78,7 @@ const InputEmail = ({ placeholder, onValidEmail, onChangeText }) => {
   };
 
   return (
-     <View style={styles.container}>
+     <View style={[styles.container, style]}>
         <Animated.View style={{ transform: [{ translateX: shakeAnimation }] }}>
            <TextInput
              style={[styles.input, error && styles.inputError]}

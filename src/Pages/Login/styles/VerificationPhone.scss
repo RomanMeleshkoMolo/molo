@@ -14,6 +14,23 @@ $padding-app: 20px;
   text-align: center;
 }
 
+.subTitle {
+  font-size: 16px;
+  padding: 10px;
+  color: #9d4edd;
+}
+
+.input {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.link {
+  text-align: center;
+  text-decoration: underline;
+}
+
 .footer {
   display: flex;
   justify-content: flex-end;
