@@ -31,6 +31,7 @@ import LoginEmail from "./src/Pages/Login/LoginEmail";
 import LoginPhone from "./src/Pages/Login/LoginPhone";
 import CountryCodeSelector from "./src/Pages/Login/CountryCodeSelector";
 import VerificationEmail from "./src/Pages/Login/VerificationEmail";
+import VerificationPhone from "./src/Pages/Login/VerificationPhone";
 
 enableScreens();
 
@@ -86,6 +87,10 @@ function App() {
               <Stack.Screen
                  name="VerificationEmail"
                  component={VerificationEmail}
+              />
+              <Stack.Screen
+                 name="VerificationPhone"
+                 component={VerificationPhone}
               />
           </Stack.Navigator>
           </NavigationContainer>

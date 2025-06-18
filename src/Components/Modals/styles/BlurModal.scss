@@ -1,0 +1,13 @@
+.background {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.6);
+  justify-content: flex-end;
+  //align-items: center;
+}
+
+.contentContainer {
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+}

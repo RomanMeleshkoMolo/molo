@@ -80,7 +80,6 @@ const LoginEmail = ({ navigation }) => {
       <SubTitle>Это необходимо для подтверждения твоего аккаунта</SubTitle>
 
       <InputEmail
-        style={[style.input]}
         value={email}
         onChangeText={setEmail}
         onValidEmail={handleValidEmail}

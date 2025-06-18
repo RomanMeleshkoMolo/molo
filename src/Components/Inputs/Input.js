@@ -4,7 +4,7 @@ import {View, Text, TextInput, Animated, Alert} from 'react-native';
 // Connect styles
 import styles from "./styles/Input.scss";
 
-const Input = ({ placeholder, onValidEmail, userCode, errorUser }) => {
+const Input = ({ style, placeholder, onValidEmail, userCode, errorUser }) => {
   const [text, setText] = React.useState('');
   const [errorUserCode, setErrorUserCode] = React.useState(false);
   const [error, setError] = React.useState(false);
@@ -66,7 +66,7 @@ const Input = ({ placeholder, onValidEmail, userCode, errorUser }) => {
      <View style={styles.container}>
         <Animated.View style={{ transform: [{ translateX: shakeAnimation }] }}>
            <TextInput
-              style={[styles.input, error && styles.inputError]}
+              style={[styles.input, error && styles.inputError, style]}
               placeholder={placeholder}
               value={text}
               maxLength={30}
