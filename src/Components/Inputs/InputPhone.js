@@ -2,70 +2,58 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-// Connect Components
-import ModalInfo from "Components/Modals/ModalInfo";
-
 // Connect styles
 import styles from "./styles/InputPhone.scss";
 
-const InputPhone = ({ style, onPhoneNumber, onChangeText }) => {
+const InputPhone = ({ style, onPhoneNumber, onChangeText, showError, setShowError }) => {
   const [countryCode, setCountryCode] = useState('+380');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [showError, setShowError] = useState(false);
   const navigation = useNavigation();
 
   const handleCountryCodePress = () => {
-     navigation.navigate('CountryCodeSelector', {
-        setCountryCode: (selectedCode) => setCountryCode(selectedCode),
-     });
+    navigation.navigate('CountryCodeSelector', {
+      setCountryCode: (selectedCode) => setCountryCode(selectedCode),
+    });
   };
 
   const handlePhoneNumberChange = (input) => {
-     if (input.length > 20) {
-       setShowError(true);
-       return;
-     }
+    if (input.length > 20) {
+      setShowError(true);
+      return;
+    }
 
-     setShowError(false);
-     setPhoneNumber(input);
+    setShowError(false);
+    setPhoneNumber(input);
 
-     const fullNumber = `${countryCode}${input}`;
+    const fullNumber = `${countryCode}${input}`;
 
-     if (onPhoneNumber) {
-       onPhoneNumber(fullNumber.length > 7);
-     }
+    if (onPhoneNumber) {
+      onPhoneNumber(fullNumber.length > 7);
+    }
 
-     if (onChangeText) {
-       onChangeText(fullNumber);
-     }
+    if (onChangeText) {
+      onChangeText(fullNumber);
+    }
   };
 
   return (
-     <View style={[{ flexDirection: 'row', alignItems: 'center' }, style]}>
-        <TouchableOpacity onPress={handleCountryCodePress}>
-           <TextInput
-              style={[styles.input]}
-              value={countryCode}
-              editable={false}
-            />
-        </TouchableOpacity>
+    <View style={[{ flexDirection: 'row', alignItems: 'center' }, style]}>
+      <TouchableOpacity onPress={handleCountryCodePress}>
         <TextInput
-           style={[styles.input]}
-           placeholder="Phone Number"
-           keyboardType="phone-pad"
-           value={phoneNumber}
-           onChangeText={handlePhoneNumberChange}
-           autoFocus={true}
+          style={[styles.input]}
+          value={countryCode}
+          editable={false}
         />
-        {showError && (
-        <ModalInfo
-           message="Номер не должен превышать 20 символов"
-           backgroundColor="#ffcc00" // желтый для предупреждения
-           textColor="#000" // черный текст
-           onHide={() => setShowError(false)}
-        />
-     )}
-     </View>
+      </TouchableOpacity>
+      <TextInput
+        style={[styles.input]}
+        placeholder="Phone Number"
+        keyboardType="phone-pad"
+        value={phoneNumber}
+        onChangeText={handlePhoneNumberChange}
+        autoFocus={true}
+      />
+    </View>
   );
 };
 
