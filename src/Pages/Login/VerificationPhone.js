@@ -46,6 +46,8 @@ const VerificationPhone = ({ navigation, route }) => {
       setModalText("Код верный");
       setErrorUserCode(true);
 
+      navigation.navigate('LoginUserName');
+
     } else {
       setModalColor('#e56b6f');
       setModalText("Введенный неверный код!");
@@ -73,10 +75,6 @@ const VerificationPhone = ({ navigation, route }) => {
            />
          )}
 
-        <View style={styles.header}>
-          <GoBackButton navigation={navigation} />
-        </View>
-
         <Title>
            Теперь нам нужно убедиться что полученный код принадлежит тебе
         </Title>
@@ -94,10 +92,10 @@ const VerificationPhone = ({ navigation, route }) => {
            style={styles.input}
            onValidEmail={handleValidEmail}
            userCode={handleUserCode}
-           errorUser={errorUserCode}
-           modalColor={modalColor}
-           modalText={modalText}
-           setErrorUserCode={setErrorUserCode} // Pass the setter to reset the error
+           // errorUser={errorUserCode}
+           // modalColor={modalColor}
+           // modalText={modalText}
+           // setErrorUserCode={setErrorUserCode} // Pass the setter to reset the error
         />
 
         <Text style={styles.link} onPress={goBack}>

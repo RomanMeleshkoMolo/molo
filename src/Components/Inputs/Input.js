@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Animated } from 'react-native';
+import {View, Text, TextInput, Animated, Alert} from 'react-native';
 
 // Connect styles
 import styles from "./styles/Input.scss";
 
-const Input = ({ style, placeholder, onValidEmail, userCode, errorUser, modalColor, setErrorUserCode, modalText }) => {
+const Input = ({ style, placeholder, onValidEmail, userCode, keyboardType, userName }) => {
   const [text, setText] = useState('');
   const [error, setError] = useState(false);
   const shakeAnimation = React.useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    if (errorUser) {
-      setTimeout(() => {
-        setErrorUserCode(false); // Reset the errorUserCode after showing the modal
-      }, 3000);
-    }
-  }, [errorUser, setErrorUserCode]);
 
   const validateInput = (input) => {
     if (input.trim() === '') {
@@ -50,12 +42,16 @@ const Input = ({ style, placeholder, onValidEmail, userCode, errorUser, modalCol
     ]).start();
   };
 
-  const handleChangeText = (input) => {
-    setText(input);
-    validateInput(input);
+  const handleChangeText = ( input ) => {
+    setText( input );
+    validateInput( input );
+
+    if(userName) {
+      userName( input )
+    }
 
     if (userCode) {
-      userCode(input);
+      userCode( input );
     }
 
     if (onValidEmail) {
@@ -69,13 +65,13 @@ const Input = ({ style, placeholder, onValidEmail, userCode, errorUser, modalCol
         <Animated.View style={{ transform: [{ translateX: shakeAnimation }] }}>
            <TextInput
               style={[styles.input, error && styles.inputError, style]}
-              placeholder={placeholder}
-              value={text}
-              maxLength={30}
-              onChangeText={handleChangeText}
+              placeholder={ placeholder }
+              value={ text }
+              maxLength={ 30 }
+              onChangeText={ handleChangeText }
               onBlur={() => validateInput(text)}
-              keyboardType="numeric"
-              autoFocus={true}
+              keyboardType={ keyboardType }
+              autoFocus={ true }
            />
         </Animated.View>
         {error &&
