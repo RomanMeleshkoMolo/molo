@@ -32,6 +32,7 @@ import LoginPhone from "./src/Pages/Login/LoginPhone";
 import CountryCodeSelector from "./src/Pages/Login/CountryCodeSelector";
 import VerificationEmail from "./src/Pages/Login/VerificationEmail";
 import VerificationPhone from "./src/Pages/Login/VerificationPhone";
+import LoginUserName from "./src/Pages/Login/LoginUserName";
 
 enableScreens();
 
@@ -91,6 +92,10 @@ function App() {
               <Stack.Screen
                  name="VerificationPhone"
                  component={VerificationPhone}
+              />
+              <Stack.Screen
+                 name="LoginUserName"
+                 component={LoginUserName}
               />
           </Stack.Navigator>
           </NavigationContainer>
