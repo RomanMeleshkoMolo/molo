@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // Connect Components
-import ModalError from "../Modals/ModalError";
+import ModalInfo from "Components/Modals/ModalInfo";
 
 // Connect styles
 import styles from "./styles/InputPhone.scss";
@@ -58,11 +58,13 @@ const InputPhone = ({ style, onPhoneNumber, onChangeText }) => {
            autoFocus={true}
         />
         {showError && (
-         <ModalError
-            message="Номер не должен превышать 20 символов"
-            onHide={() => setShowError(false)}
-         />
-      )}
+        <ModalInfo
+           message="Номер не должен превышать 20 символов"
+           backgroundColor="#ffcc00" // желтый для предупреждения
+           textColor="#000" // черный текст
+           onHide={() => setShowError(false)}
+        />
+     )}
      </View>
   );
 };
