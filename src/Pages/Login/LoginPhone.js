@@ -4,7 +4,7 @@
  */
 
 import React, {useState} from 'react';
-import {ActivityIndicator, Alert, View, Text, Button} from 'react-native';
+import { ActivityIndicator, Alert, View } from 'react-native';
 
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";
@@ -15,6 +15,7 @@ import TitleWithIcon from "Components/Titles/TitleWithIcon";
 import InputPhone from "Components/Inputs/InputPhone";
 import BlurModal from "Components/Modals/BlurModal";
 
+// Connect styles
 import styles from "./styles/LoginPhone.scss";
 
 const LoginPhone = ({ navigation }) => {
@@ -22,11 +23,6 @@ const LoginPhone = ({ navigation }) => {
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-     setModalVisible(!modalVisible);
-  };
-
 
   const goToVerificationPhone = async () => {
 
@@ -68,6 +64,10 @@ const LoginPhone = ({ navigation }) => {
       setIsPhoneValid(isValid);
   };
 
+  const toggleModal = () => {
+      setModalVisible(!modalVisible);
+  };
+
   return (
      <View style={[styles.container]}>
 
@@ -77,8 +77,14 @@ const LoginPhone = ({ navigation }) => {
             ></GoBackButton>
         </View>
 
-        <Title>Отлично! Укажи свой номер телефона</Title>
-        <SubTitle>Мы позвоним на твой номер.</SubTitle>
+        <Title>
+            Отлично! Укажи свой номер телефона
+        </Title>
+
+        <SubTitle>
+            Мы позвоним на твой номер.
+        </SubTitle>
+
         <SubTitle
            colorText="#9d4edd"
         >

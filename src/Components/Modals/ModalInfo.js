@@ -1,20 +1,18 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Text, Dimensions, View } from 'react-native';
+import { Animated, Text, View } from 'react-native';
 
-// const { width } = Dimensions.get('window');
+// подключение стилей
+import styles from "./styles/ModalInfo.scss";
 
-// Connect styles
-import styles from "./styles/ModalError.scss";
-
-const ModalError = ({ message, onHide }) => {
-  const slideAnim = useRef(new Animated.Value(-200)).current; // стартовая позиция за верхней границей
+const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
+  const slideAnim = useRef(new Animated.Value(-200)).current; // стартовая позиция
   const opacityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // Анимация появления
+    // анимация появления
     Animated.parallel([
       Animated.timing(slideAnim, {
-        toValue: -150, // позиция по вертикали (от нижней границы)
+        toValue: -150,
         duration: 300,
         useNativeDriver: true,
       }),
@@ -25,9 +23,9 @@ const ModalError = ({ message, onHide }) => {
       }),
     ]).start();
 
-    // Автоматическое скрытие через 2 секунды
+    // автоматическое скрытие через 2 сек
     const timeout = setTimeout(() => {
-      // Анимация скрытия
+      // анимация скрытия
       Animated.parallel([
         Animated.timing(slideAnim, {
           toValue: -200,
@@ -54,12 +52,14 @@ const ModalError = ({ message, onHide }) => {
         {
           transform: [{ translateY: slideAnim }],
           opacity: opacityAnim,
+          backgroundColor: backgroundColor || '#333', // дефолтный цвет
+          textColor: textColor || '#333'
         },
       ]}
     >
-      <Text style={styles.text}>{message}</Text>
+      <Text style={[styles.text, { color: textColor || '#fff' }]}>{message}</Text>
     </Animated.View>
   );
 };
 
-export default ModalError;
+export default ModalInfo;
