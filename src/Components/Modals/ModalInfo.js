@@ -1,18 +1,18 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Text, View } from 'react-native';
+import { Animated, Text } from 'react-native';
 
-// подключение стилей
+// Connect style
 import styles from "./styles/ModalInfo.scss";
 
 const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
-  const slideAnim = useRef(new Animated.Value(-200)).current; // стартовая позиция
+  const slideAnim = useRef(new Animated.Value(-200)).current; // Start position
   const opacityAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    // анимация появления
+    // Show animation
     Animated.parallel([
       Animated.timing(slideAnim, {
-        toValue: -150,
+        toValue: 0, // Final position
         duration: 300,
         useNativeDriver: true,
       }),
@@ -23,9 +23,9 @@ const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
       }),
     ]).start();
 
-    // автоматическое скрытие через 2 сек
+    // Auto-hide after 2 seconds
     const timeout = setTimeout(() => {
-      // анимация скрытия
+      // Hide animation
       Animated.parallel([
         Animated.timing(slideAnim, {
           toValue: -200,
@@ -46,19 +46,22 @@ const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
   }, [slideAnim, opacityAnim, onHide]);
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        {
-          transform: [{ translateY: slideAnim }],
-          opacity: opacityAnim,
-          backgroundColor: backgroundColor || '#333', // дефолтный цвет
-          textColor: textColor || '#333'
-        },
-      ]}
-    >
-      <Text style={[styles.text, { color: textColor || '#fff' }]}>{message}</Text>
-    </Animated.View>
+     <Animated.View
+        style={[
+           styles.container,
+           {
+             transform: [{ translateY: slideAnim }],
+             opacity: opacityAnim,
+             backgroundColor: backgroundColor || '#333', // Default color
+           },
+        ]}
+     >
+        <Text
+            style={[styles.text, { color: textColor || '#fff' }]}
+        >
+          {message}
+        </Text>
+     </Animated.View>
   );
 };
 
