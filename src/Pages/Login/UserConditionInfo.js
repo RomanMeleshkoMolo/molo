@@ -9,7 +9,7 @@ import { View, Text, ScrollView, Linking} from 'react-native';
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";
 
-import style from "./styles/UserConditionInfo.scss";
+import style from "LoginStyles/UserConditionInfo.scss";
 
 const UserConditionInfo = ({ navigation }) => {
   return (

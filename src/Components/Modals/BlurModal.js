@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, View, TouchableWithoutFeedback } from 'react-native';
 
-import styles from "./styles/BlurModal.scss";
+import styles from "ModalStyles/BlurModal.scss";
 
 const BlurModal = ({ visible, onClose, children }) => {
 

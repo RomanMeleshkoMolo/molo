@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
 // Connect styles
-import style from "./styles/GoBackButton.scss";
+import style from "ButtonStyles/GoBackButton.scss";
 
 const GoBackButton = ({ navigation }) => {
 

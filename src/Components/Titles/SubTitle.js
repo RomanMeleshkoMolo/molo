@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 // Connect styles
-import styles from "./styles/SubTitle.scss";
+import styles from "TitleStyles/SubTitle.scss";
 
 const SubTitle = ({ style, children, colorText } ) => {
 

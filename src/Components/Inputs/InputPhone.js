@@ -3,7 +3,7 @@ import { View, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 // Connect styles
-import styles from "./styles/InputPhone.scss";
+import styles from "InputStyles/InputPhone.scss";
 
 const InputPhone = ({ style, onPhoneNumber, onChangeText, showError, setShowError }) => {
   const [countryCode, setCountryCode] = useState('+380');

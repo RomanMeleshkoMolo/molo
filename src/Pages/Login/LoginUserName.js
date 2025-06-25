@@ -8,7 +8,7 @@ import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import Input from "Components/Inputs/Input";
 
 // Connect styles
-import styles from "./styles/LoginUserName.scss";
+import styles from "LoginStyles/LoginUserName.scss";
 
 const LoginUserName = ({ navigation }) => {
   const [nameUser, setNameUser] = useState('');

@@ -14,7 +14,7 @@ import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import Input from "Components/Inputs/Input";
 
 // Connect styles
-import styles from "./styles/VerificationPhone.scss";
+import styles from "LoginStyles/VerificationPhone.scss";
 import ModalInfo from "Components/Modals/ModalInfo";
 
 const VerificationPhone = ({ navigation, route }) => {

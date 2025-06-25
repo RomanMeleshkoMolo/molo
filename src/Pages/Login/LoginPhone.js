@@ -12,7 +12,7 @@ import BlurModal from "Components/Modals/BlurModal";
 import ModalInfo from "Components/Modals/ModalInfo";
 
 // Connect styles
-import styles from "./styles/LoginPhone.scss";
+import styles from "LoginStyles/LoginPhone.scss";
 
 const LoginPhone = ({ navigation }) => {
   const [phone, setPhone] = useState('');

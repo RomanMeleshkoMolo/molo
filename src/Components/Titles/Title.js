@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 // Connect styles
-import styles from "./styles/Title.scss";
+import styles from "TitleStyles/Title.scss";
 
 const Title = ({ children } ) => {
 

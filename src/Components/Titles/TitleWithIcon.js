@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 // Connect styles
-import styles from "./styles/TitleWithIcon.scss";
+import styles from "TitleStyles/TitleWithIcon.scss";
 
 // Connect Components
 import Icon from "react-native-vector-icons/Ionicons";

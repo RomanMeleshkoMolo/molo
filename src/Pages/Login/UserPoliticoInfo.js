@@ -9,7 +9,7 @@ import { View, Text, ScrollView} from 'react-native';
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";
 
-import styles from "./styles/UserPoliticoInfo.scss";
+import styles from "LoginStyles/UserPoliticoInfo.scss";
 
 const UserPoliticoInfo = ({ navigation }) => {
   return (

@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 // Connect Navigator
 // import { useNavigation } from '@react-navigation/native';
 
-import styles from "./styles/InfoUserLogin.scss";
+import styles from "FooterStyles/InfoUserLogin.scss";
 
 const InfoUserLogin = ({ navigation }) => {
   // const navigation = useNavigation();

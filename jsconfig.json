@@ -2,7 +2,15 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "Components/*": ["src/Components/*"]
+            "Components/*":   ["src/Components/*"],
+            "ButtonStyles/*": ["src/Components/Buttons/styles/*"],
+            "FooterStyles/*": ["src/Components/Footer/styles/*"],
+            "InputStyles/*":  ["src/Components/Inputs/styles/*"],
+            "LogoStyles/*":   ["src/Components/Logo/styles/*"],
+            "ModalStyles/*":  ["src/Components/Modals/styles/*"],
+            "TitleStyles/*":  ["src/Components/Titles/styles/*"],
+
+            "LoginStyles/*":  ["src/Pages/Login/styles/*"]
         }
     }
 }
