@@ -11,6 +11,7 @@ import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import Logo from "Components/Logo/Logo";
 import InfoUserLogin from "Components/Footer/InfoUserLogin";
 import Bubble from "Components/Effects/Bubble"
+import GoogleSignInButton from "Components/Bottons/GoogleSignInButton";
 
 // Connect styles
 import style from "./styles/Login.scss";
@@ -62,6 +63,8 @@ const Login = ({ navigation }) => {
            buttonText="Продолжить по телефону"
            handle={handleCreateAccountPhone}
        ></ButtonNameIcon>
+
+       <GoogleSignInButton></GoogleSignInButton>
 
        <InfoUserLogin navigation={navigation}></InfoUserLogin>
 
