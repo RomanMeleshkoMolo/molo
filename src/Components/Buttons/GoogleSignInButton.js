@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
-import { View, Button, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
+
+import { WEB_CLIENT_ID } from '@env';
 
 const GoogleSignInButton = () => {
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId: '401056033169-rs9cfjkp4adtoi1urefk3rvq0vug2qk4.apps.googleusercontent.com',
+       // webClientId: '401056033169-rs9cfjkp4adtoi1urefk3rvq0vug2qk4.apps.googleusercontent.com',
+      // webClientId: process.env.WEB_CLIENT_ID,
+       webClientId: WEB_CLIENT_ID,
       offlineAccess: true,
     });
   }, []);

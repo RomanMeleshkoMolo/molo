@@ -1,15 +1,17 @@
 $background-app: #d9dcd6;
-$padding-app: 20px;
+$padding-horizontal: 0px;
+$padding-vertical: 30px;
 $background-item-country: #cbc9c9;
 
 .container {
+  display: flex;
   flex: 1;
   background-color: $background-app;
-  padding: $padding-app;
+  padding: 20px;
 }
 
 .item {
-  padding: $padding-app;
+  padding: 20px;
   border-bottom-width: 1px;
   border-bottom-color: #ddd;
   border-radius: 20px;
@@ -24,7 +26,7 @@ $background-item-country: #cbc9c9;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-bottom: 20px;
+  padding: $padding-vertical $padding-horizontal;
 }
 .headerText {
   margin-left: 30px;

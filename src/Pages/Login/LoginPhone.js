@@ -62,77 +62,78 @@ const LoginPhone = ({ navigation }) => {
   };
 
   return (
-    <View style={[styles.container]}>
-      <View style={styles.header}>
-        <GoBackButton navigation={navigation} />
-      </View>
+     <View style={[styles.container]}>
 
-      <Title>
-        Отлично! Укажи свой номер телефона
-      </Title>
+        <View style={styles.header}>
+          <GoBackButton navigation={navigation} />
+        </View>
 
-      <SubTitle>
-        Мы позвоним на твой номер.
-      </SubTitle>
+        <Title>
+          Отлично! Укажи свой номер телефона
+        </Title>
 
-      <SubTitle colorText="#9d4edd">
-        Отвечать на номер не нужно!
-      </SubTitle>
-
-      <InputPhone
-        style={[styles.input]}
-        onChangeText={setPhone}
-        onPhoneNumber={handlePhoneNumber}
-        showError={showError}
-        setShowError={setShowError}
-      />
-
-      <ButtonNameIcon
-        buttonText="Регистрация по email"
-        handle={goToVerificationEmail}
-      />
-
-      <BlurModal visible={modalVisible} onClose={toggleModal}>
         <SubTitle>
-          Мы позвоним на твой номер и тебе нужно ввести последние 6 цифр на следующей странице
+          Мы позвоним на твой номер.
         </SubTitle>
 
         <SubTitle colorText="#9d4edd">
           Отвечать на номер не нужно!
         </SubTitle>
 
-        {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <ButtonNameIcon
-            buttonText="Позвонить"
-            handle={goToVerificationPhone}
-            disable={!isPhoneValid}
-          />
-        )}
-      </BlurModal>
-
-      {showError && (
-        <ModalInfo
-          message="Номер не должен превышать 20 символов"
-          backgroundColor="#ffcc00"
-          textColor="#000"
-          onHide={() => setShowError(false)}
+        <InputPhone
+          style={[styles.input]}
+          onChangeText={setPhone}
+          onPhoneNumber={handlePhoneNumber}
+          showError={showError}
+          setShowError={setShowError}
         />
-      )}
-
-      <View style={styles.footer}>
-        <TitleWithIcon nameIcon="lock-closed-outline">
-          Твой номер телефона никто не увидет в профиле!Будьте спокойны;)
-        </TitleWithIcon>
 
         <ButtonNameIcon
-          buttonText="Дальше"
-          handle={toggleModal}
-          disable={!isPhoneValid}
+          buttonText="Регистрация по email"
+          handle={goToVerificationEmail}
         />
-      </View>
-    </View>
+
+        <BlurModal visible={modalVisible} onClose={toggleModal}>
+           <SubTitle>
+             Мы позвоним на твой номер и тебе нужно ввести последние 6 цифр на следующей странице
+           </SubTitle>
+
+           <SubTitle colorText="#9d4edd">
+             Отвечать на номер не нужно!
+           </SubTitle>
+
+           {loading ? (
+              <ActivityIndicator size="large" color="#0000ff" />
+           ) : (
+              <ButtonNameIcon
+                buttonText="Позвонить"
+                handle={goToVerificationPhone}
+                disable={!isPhoneValid}
+              />
+           )}
+        </BlurModal>
+
+        {showError && (
+           <ModalInfo
+              message="Номер не должен превышать 20 символов"
+              backgroundColor="#ffcc00"
+              textColor="#000"
+              onHide={() => setShowError(false)}
+           />
+        )}
+
+        <View style={styles.footer}>
+           <TitleWithIcon nameIcon="lock-closed-outline">
+             Твой номер телефона никто не увидет в профиле!Будьте спокойны;)
+           </TitleWithIcon>
+
+           <ButtonNameIcon
+             buttonText="Дальше"
+             handle={toggleModal}
+             disable={!isPhoneValid}
+           />
+        </View>
+     </View>
   );
 };
 
