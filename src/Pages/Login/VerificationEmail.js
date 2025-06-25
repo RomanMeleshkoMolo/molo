@@ -9,7 +9,7 @@ import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import Input from "Components/Inputs/Input";
 
 // Connect styles
-import styles from "./styles/VerificationEmail.scss";
+import styles from "LoginStyles/VerificationEmail.scss";
 
 const VerificationEmail = ({ navigation, route }) => {
   const [text, setText] = useState('');

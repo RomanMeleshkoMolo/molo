@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, Animated, TouchableOpacity } from 'react-native';
 
 // Connect styles
-import styles from "./styles/InputEmail.scss";
+import styles from "InputStyles/InputEmail.scss";
 
 const InputEmail = ({ style, placeholder, onValidEmail, onChangeText }) => {
   const [text, setText] = React.useState('');

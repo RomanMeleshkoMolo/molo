@@ -1,7 +1,7 @@
 import { View, Image } from 'react-native';
 
 // Connect styles
-import styles from "./styles/Logo.scss";
+import styles from "LogoStyles/Logo.scss";
 
 const Logo = ({  logoName, navigation }) => {
 

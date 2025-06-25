@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Alert, ActivityIndicator } from 'react-native';
 
 // Connect components
-// import GoBackButton from "Components/Bottons/GoBackButton";
 import GoBackButton from "Components/Buttons/GoBackButton";
 
 import Title from "Components/Titles/Title";
@@ -12,7 +11,7 @@ import TitleWithIcon from "Components/Titles/TitleWithIcon";
 import InputEmail from "Components/Inputs/InputEmail";
 
 // Connect Global Styles
-import style from "./styles/LoginEmail.scss";
+import style from "LoginStyles/LoginEmail.scss";
 
 const LoginEmail = ({ navigation }) => {
   const [email, setEmail] = useState('');

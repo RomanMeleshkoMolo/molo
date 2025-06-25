@@ -14,7 +14,7 @@ import Bubble from "Components/Effects/Bubble"
 import GoogleSignInButton from "Components/Buttons/GoogleSignInButton";
 
 // Connect styles
-import style from "./styles/Login.scss";
+import styles from "LoginStyles/Login.scss";
 
 const Login = ({ navigation }) => {
  const [login, setLogin] = useState('');
@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
  }
 
  return (
-    <View style={[style.container]}>
+    <View style={[styles.container]}>
 
        <Logo
           logoName="icon.png"

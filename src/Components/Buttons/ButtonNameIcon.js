@@ -5,20 +5,21 @@ import { Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 // Connect styles
-import style from "./styles/ButtonNameIcon.scss";
+// import styles from "./styles/ButtonNameIcon.scss";
+import styles from "ButtonStyles/ButtonNameIcon.scss";
 
 const ButtonNameIcon = ({ leftIcon, rightIcon, iconBtn, buttonText, handle, disable }) => {
     return (
         <TouchableOpacity
             style={[
-                style.globalBtn,
-                disable && style.disabledBtn // Add disabled style conditionally
+                styles.globalBtn,
+                disable && styles.disabledBtn // Add disabled style conditionally
             ]}
             onPress={!disable ? handle : null} // Disable onPress if disable is false
             activeOpacity={disable ? 0.7 : 1} // Adjust opacity based on disable
         >
             {leftIcon && <Icon name={iconBtn} size={30} />}
-            <Text style={style.globalBtnText}>{buttonText}</Text>
+            <Text style={styles.globalBtnText}>{buttonText}</Text>
             {rightIcon && <Icon name={iconBtn} size={30} />}
         </TouchableOpacity>
     );

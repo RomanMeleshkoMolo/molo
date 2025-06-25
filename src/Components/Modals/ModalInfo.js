@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Animated, Text } from 'react-native';
 
 // Connect style
-import styles from "./styles/ModalInfo.scss";
+import styles from "ModalStyles/ModalInfo.scss";
 
 const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
   const slideAnim = useRef(new Animated.Value(-200)).current; // Start position
@@ -12,7 +12,7 @@ const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
     // Show animation
     Animated.parallel([
       Animated.timing(slideAnim, {
-        toValue: 0, // Final position
+        toValue: 20, // Final position
         duration: 300,
         useNativeDriver: true,
       }),

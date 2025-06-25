@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {View, Text, TextInput, Animated, Alert} from 'react-native';
 
 // Connect styles
-import styles from "./styles/Input.scss";
+import styles from "InputStyles/Input.scss";
 
 const Input = ({ style, placeholder, onValidEmail, userCode, keyboardType, userName }) => {
   const [text, setText] = useState('');
