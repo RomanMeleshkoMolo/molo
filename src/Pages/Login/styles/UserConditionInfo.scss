@@ -1,10 +1,11 @@
 $background-app: #d9dcd6;
-$padding-app: 20px;
+$padding-horizontal: 20px;
+$padding-vertical: 40px;
 
 .container {
   display: flex;
   flex: 1;
-  padding: $padding-app;
+  padding: $padding-vertical $padding-horizontal;
   background-color: $background-app;
 }
 
@@ -15,7 +16,7 @@ $padding-app: 20px;
 .header {
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
+  padding: 10px;
   text-align: center;
 }
 

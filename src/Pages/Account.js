@@ -41,7 +41,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Components for page
-import GoBackButton from "../Components/Bottons/GoBackButton";
+import GoBackButton from "Components/Buttons/GoBackButton";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const Account = ({ route }) => {

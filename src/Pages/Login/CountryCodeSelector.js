@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 
 // Connect components
-import GoBackButton from "../../Components/Bottons/GoBackButton";
+import GoBackButton from "Components/Buttons/GoBackButton";
 
 // Connect styles
 import styles from "./styles/CountryCodeSelector.scss";
@@ -62,27 +62,27 @@ const CountryCodeSelector = ({ route, navigation }) => {
   };
 
   return (
-    <View style={[styles.container]}>
+     <View style={[styles.container]}>
 
-      <View style={[styles.backButton]}>
-        <GoBackButton
-          navigation={navigation}
+        <View style={[styles.backButton]}>
+           <GoBackButton
+             navigation={navigation}
+           />
+          <Text style={[styles.headerText]}>Страна/Регион</Text>
+        </View>
+
+
+        <FlatList
+           data={countryCodes}
+           keyExtractor={(item) => item.code}
+           renderItem={({ item }) => (
+              <TouchableOpacity style={[styles.item]} onPress={() => handleSelectCode(item.code)}>
+                 <Text style={[styles.flag]}>{item.flag}</Text>
+                 <Text style={[styles.text]}>{`${item.name} (${item.code})`}</Text>
+              </TouchableOpacity>
+           )}
         />
-        <Text style={[styles.headerText]}>Страна/Регион</Text>
-      </View>
-
-
-      <FlatList
-        data={countryCodes}
-        keyExtractor={(item) => item.code}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={[styles.item]} onPress={() => handleSelectCode(item.code)}>
-            <Text style={[styles.flag]}>{item.flag}</Text>
-            <Text style={[styles.text]}>{`${item.name} (${item.code})`}</Text>
-          </TouchableOpacity>
-        )}
-      />
-    </View>
+     </View>
   );
 };
 

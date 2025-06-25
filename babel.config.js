@@ -12,5 +12,12 @@ const path = require('path');
            },
          },
        ],
+       [
+           'module:react-native-dotenv',
+         {
+           moduleName: '@env',
+           path: path.resolve(__dirname, '.env'),
+         }
+       ],
      ],
    };

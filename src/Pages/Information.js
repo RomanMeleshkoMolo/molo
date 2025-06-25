@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
 
 // Components for page
-import GoBackButton from "../Components/Bottons/GoBackButton";
+import GoBackButton from "Components/Buttons/GoBackButton";
 
 const Information = () => {
 
