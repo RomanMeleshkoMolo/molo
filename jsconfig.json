@@ -10,6 +10,7 @@
             "ModalStyles/*":  ["src/Components/Modals/styles/*"],
             "TitleStyles/*":  ["src/Components/Titles/styles/*"],
 
+            "Pages/*":  ["src/Pages/*"],
             "LoginStyles/*":  ["src/Pages/Login/styles/*"]
         }
     }

@@ -18,6 +18,7 @@ const path = require('path');
              'TitleStyles': path.resolve(__dirname, 'src/Components/Titles/styles'),
 
              // Alias for Pages
+             'Pages': path.resolve(__dirname, 'src/Pages'),
              'LoginStyles': path.resolve(__dirname, 'src/Pages/Login/styles'),
            },
          },

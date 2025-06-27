@@ -10,40 +10,73 @@
  * Molo is a private development, and all rights are owned by the app's owner.
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
-import {Provider} from "react-native-paper";
+import { Provider } from "react-native-paper";
 
 
-// Pages
+// It is old Pages
 import Phone from "./src/Pages/Phone";
 import Account from "./src/Pages/Account";
 import MainNavi from "./src/Pages/MainNavi";
 import Information from "./src/Pages/Information";
 
-import Login from "./src/Pages/Login/Login";
-import UserConditionInfo from "./src/Pages/Login/UserConditionInfo";
-import UserPoliticoInfo from "./src/Pages/Login/UserPoliticoInfo";
-import LoginEmail from "./src/Pages/Login/LoginEmail";
-import LoginPhone from "./src/Pages/Login/LoginPhone";
-import CountryCodeSelector from "./src/Pages/Login/CountryCodeSelector";
-import VerificationEmail from "./src/Pages/Login/VerificationEmail";
-import VerificationPhone from "./src/Pages/Login/VerificationPhone";
-import LoginUserName from "./src/Pages/Login/LoginUserName";
+// Pages for Molo
+import Login from "Pages/Login/Login";
+import UserConditionInfo from "Pages/Login/UserConditionInfo";
+import UserPoliticoInfo from "Pages/Login/UserPoliticoInfo";
+import LoginEmail from "Pages/Login/LoginEmail";
+import LoginPhone from "Pages/Login/LoginPhone";
+import CountryCodeSelector from "Pages/Login/CountryCodeSelector";
+import VerificationEmail from "Pages/Login/VerificationEmail";
+import VerificationPhone from "Pages/Login/VerificationPhone";
+import LoginUserName from "Pages/Login/LoginUserName";
+
+// Connect AsyncStorage for check Tokens
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 enableScreens();
 
 const Stack = createNativeStackNavigator();
 
-function App() {
+const App = () => {
+  const [initialRoute, setInitialRoute] = useState(null);
+
+  // Checking Token and redirect
+  useEffect(() => {
+     const checkLoginStatus = async () => {
+         const userToken = await AsyncStorage.getItem('userGoogleToken');
+
+         console.log("------ From AsyncStorage ---------");
+         console.log( userToken );
+
+         // await AsyncStorage.removeItem('userToken');
+
+        if (userToken) {
+           console.log("inside if");
+           setInitialRoute('LoginUserName');
+        } else {
+           setInitialRoute('Login');
+        }
+
+       };
+
+       checkLoginStatus();
+     }, []);
+
+
+   if (!initialRoute) {
+    return null; // Или индикатор загрузки
+  }
+
   return (
      <Provider>
         <SafeAreaProvider>
            <NavigationContainer>
-              <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+              <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
               <Stack.Screen
                   name="Login"
                   component={Login}
@@ -106,66 +139,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-// import {Image, StyleSheet, Text, View} from 'react-native';
-//
-// // Navigation
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// // import { createStackNavigator } from '@react-navigation/stack';
-//
-// // Pages
-// import Login from "./src/Pages/Login";
-// import Phone from "./src/Pages/Phone";
-// import MainNavi from "./src/Pages/MainNavi";
-//
-// const Stack = createNativeStackNavigator();
-//
-// export default function App() {
-//   return (
-//
-//      <NavigationContainer>
-//        {/* screenOptions={{ headerShown: false }} add to <Stack.Navigator initialRouteName="Login"> like attribute  */}
-//         <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-//           <Stack.Screen
-//            name="Login"
-//            component={Login}
-//            />
-//           <Stack.Screen
-//            name="Phone"
-//            component={Phone}
-//            />
-//           <Stack.Screen
-//            name="MainNavi"
-//            component={MainNavi}
-//            options={{title: ""}}
-//            />
-//         </Stack.Navigator>
-//      </NavigationContainer>
-//
-//   );
-// }
-//
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//
-//   text: {
-//     fontSize: 20,
-//     color: '#333',
-//   },
-// });
-
