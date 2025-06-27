@@ -48,15 +48,15 @@ const App = () => {
   // Checking Token and redirect
   useEffect(() => {
      const checkLoginStatus = async () => {
-         const userToken = await AsyncStorage.getItem('userGoogleToken');
+         const registrationUserGoogleState = await AsyncStorage.getItem('registrationUserGoogleState');
+         const registrationUserEmailState = await AsyncStorage.getItem('registrationUserEmailState');
+         const registrationUserPhoneState = await AsyncStorage.getItem('registrationUserPhoneState');
 
-         console.log("------ From AsyncStorage ---------");
-         console.log( userToken );
+         // await AsyncStorage.removeItem('userGoogleToken');
+         // await AsyncStorage.removeItem('userEmailToken');
+         // await AsyncStorage.removeItem('userPhoneToken');
 
-         // await AsyncStorage.removeItem('userToken');
-
-        if (userToken) {
-           console.log("inside if");
+        if ( registrationUserGoogleState || registrationUserEmailState || registrationUserPhoneState ) {
            setInitialRoute('LoginUserName');
         } else {
            setInitialRoute('Login');
@@ -65,10 +65,10 @@ const App = () => {
        };
 
        checkLoginStatus();
-     }, []);
+  }, []);
 
 
-   if (!initialRoute) {
+  if (!initialRoute) {
     return null; // Или индикатор загрузки
   }
 

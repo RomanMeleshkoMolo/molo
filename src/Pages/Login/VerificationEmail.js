@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View, Alert, Text, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";
@@ -11,7 +11,15 @@ import Input from "Components/Inputs/Input";
 // Connect styles
 import styles from "LoginStyles/VerificationEmail.scss";
 
-const VerificationEmail = ({ navigation, route }) => {
+// Connect Navigation
+import { useNavigation } from '@react-navigation/native';
+
+// Connect AsyncStorage for check Tokens
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const VerificationEmail = ({ route }) => {
+  const navigation = useNavigation();
+
   const [text, setText] = useState('');
   const [code, setCode] = useState('');
   const [ errorUserCode, setErrorUserCode ] = useState(false);
@@ -32,14 +40,23 @@ const VerificationEmail = ({ navigation, route }) => {
       navigation.goBack();
   }
 
-  const verificationCode = () => {
+  const verificationCodeUser = async () => {
 
-      if( code === userCode) {
-          // Перенаправляем на следущюю страницу
-          Alert.alert("Number is correct!");
-      }else {
-          setErrorUserCode( true );
-      }
+     if( code === userCode ) {
+
+        await AsyncStorage.setItem('registrationUserEmailState', 'true');
+
+        // Go to other page
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'LoginUserName' }],
+        });
+
+     }else {
+
+       setErrorUserCode( true );
+
+     }
 
   }
 
@@ -58,9 +75,15 @@ const VerificationEmail = ({ navigation, route }) => {
           <GoBackButton navigation={navigation} />
         </View>
 
-        <Title>Теперь нам нужно убедиться что полученный код пренадлежит тебе</Title>
-        <SubTitle>Мы отправили код подтверждения.Просто введите его ниже и все:)</SubTitle>
-        <SubTitle>{`${text}`}</SubTitle>
+        <Title>
+            Теперь нам нужно убедиться что полученный код пренадлежит тебе
+        </Title>
+        <SubTitle style={styles.subTitle}>
+            Мы отправили код подтверждения.Просто введите его ниже и все:)
+        </SubTitle>
+        <SubTitle style={styles.subTitle}>
+            {`${text}`}
+        </SubTitle>
 
         <Input
           onValidEmail={handleValidEmail}
@@ -78,7 +101,7 @@ const VerificationEmail = ({ navigation, route }) => {
         <View style={styles.footer}>
            <ButtonNameIcon
               buttonText="Дальше"
-              handle={verificationCode}
+              handle={verificationCodeUser}
               disable={!isEmailValid}
            />
         </View>
