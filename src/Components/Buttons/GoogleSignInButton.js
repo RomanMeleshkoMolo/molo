@@ -31,7 +31,8 @@ const GoogleSignInButton = () => {
 
       console.log(userInfo);
 
-      await AsyncStorage.setItem('userGoogleToken', userInfo.data.idToken);
+      // await AsyncStorage.setItem('userGoogleToken', userInfo.data.idToken);
+      await AsyncStorage.setItem('registrationUserGoogleState', 'true');
 
 
       // Alert.alert('Success', `Welcome ${userInfo.data.user.name}`);

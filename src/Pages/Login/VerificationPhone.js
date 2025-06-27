@@ -16,6 +16,7 @@ import Input from "Components/Inputs/Input";
 // Connect styles
 import styles from "LoginStyles/VerificationPhone.scss";
 import ModalInfo from "Components/Modals/ModalInfo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const VerificationPhone = ({ navigation, route }) => {
   const [text, setText] = useState('');
@@ -40,13 +41,19 @@ const VerificationPhone = ({ navigation, route }) => {
     navigation.goBack();
   };
 
-  const verificationCode = () => {
+  const verificationCode = async () => {
     if (userCode === lastSixDigits) {
       setModalColor('#a7c957');
       setModalText("Код верный");
       setErrorUserCode(true);
 
-      navigation.navigate('LoginUserName');
+       await AsyncStorage.setItem('registrationUserPhoneState', 'true');
+
+        // Go to other page
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'LoginUserName' }],
+        });
 
     } else {
       setModalColor('#e56b6f');
