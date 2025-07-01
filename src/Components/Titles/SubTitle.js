@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {View, Text, Platform} from 'react-native';
 
 // Connect styles
 import styles from "TitleStyles/SubTitle.scss";
 
 const SubTitle = ({ style, children, colorText } ) => {
+
+  // Styles for Ios or Android
+  const subTitleStyles = Platform.OS === 'ios' ?
+      styles.subTitleIos : styles.subTitle;
 
   const textStyle = {
     color: colorText
@@ -13,7 +17,7 @@ const SubTitle = ({ style, children, colorText } ) => {
    return (
       <View>
 
-         <Text style={[styles.title, textStyle, style]}>
+         <Text style={[styles.title, textStyle, subTitleStyles, style]}>
             {children}
          </Text>
 

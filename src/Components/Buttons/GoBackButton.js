@@ -1,25 +1,22 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import {Platform, TouchableOpacity} from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
 // Connect styles
-import style from "ButtonStyles/GoBackButton.scss";
+import styles from "ButtonStyles/GoBackButton.scss";
 
 const GoBackButton = ({ navigation }) => {
 
-  // const goLoginPage = () => {
-  //   navigation.reset({
-  //     index: 0,
-  //     routes: [{ name: 'Login' }],
-  //   });
-  // };
+  // Styles for Ios or Android
+  const buttonStyles = Platform.OS === 'ios' ?
+      styles.buttonIos : styles.button;
 
   const goBack = () => {
     navigation.goBack();
   };
 
   return (
-    <TouchableOpacity onPress={goBack} style={style.button}>
+    <TouchableOpacity onPress={goBack} style={buttonStyles}>
       <Icon name={'arrow-back-outline'} size={30} />
     </TouchableOpacity>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Alert, ActivityIndicator } from 'react-native';
+import { View, Alert, ActivityIndicator, Platform } from 'react-native';
 
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";
@@ -12,6 +12,7 @@ import InputEmail from "Components/Inputs/InputEmail";
 
 // Connect Global Styles
 import style from "LoginStyles/LoginEmail.scss";
+import styles from "LoginStyles/LoginPhone.scss";
 
 const LoginEmail = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -37,7 +38,11 @@ const LoginEmail = ({ navigation }) => {
     try {
       console.log('Email:', email);
 
-      const response = await fetch('http://10.0.2.2:3000/send-confirmation', {
+      const apiUrl = Platform.OS === 'ios'
+           ? 'http://localhost:3000/send-confirmation'
+           : 'http://10.0.2.2:3000/send-confirmation';
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +76,7 @@ const LoginEmail = ({ navigation }) => {
   return (
     <View style={[style.container]}>
 
-      <View style={style.header}>
+      <View style={styles.header}>
         <GoBackButton navigation={navigation} />
       </View>
 
