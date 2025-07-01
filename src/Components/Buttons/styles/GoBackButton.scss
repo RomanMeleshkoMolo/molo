@@ -1,4 +1,9 @@
-.button {
+.button,
+.buttonIos {
   align-self: flex-start;
-  padding: 2px;
+}
+
+// Styles for ios
+.buttonIos {
+  margin-top: 15px;
 }

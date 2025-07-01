@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, View } from 'react-native';
+import {ActivityIndicator, Alert, View} from 'react-native';
 
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";
@@ -26,7 +26,12 @@ const LoginPhone = ({ navigation }) => {
     setModalVisible(false);
 
     try {
-      const response = await fetch('http://10.0.2.2:3000/register-phone', {
+
+      const apiPhone = Platform.OS === 'ios'
+           ? 'http://localhost:3000/register-phone'
+           : 'http://10.0.2.2:3000/register-phone';
+
+      const response = await fetch(apiPhone, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +67,7 @@ const LoginPhone = ({ navigation }) => {
   };
 
   return (
-     <View style={[styles.container]}>
+     <View style={styles.container}>
 
         <View style={styles.header}>
           <GoBackButton navigation={navigation} />
@@ -81,7 +86,7 @@ const LoginPhone = ({ navigation }) => {
         </SubTitle>
 
         <InputPhone
-          style={[styles.input]}
+          style={styles.input}
           onChangeText={setPhone}
           onPhoneNumber={handlePhoneNumber}
           showError={showError}
