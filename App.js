@@ -34,6 +34,7 @@ import CountryCodeSelector from "Pages/Login/CountryCodeSelector";
 import VerificationEmail from "Pages/Login/VerificationEmail";
 import VerificationPhone from "Pages/Login/VerificationPhone";
 import LoginUserName from "Pages/Login/LoginUserName";
+import VerificationTelegram from "Pages/Login/VerificationTelegram";
 
 // Connect AsyncStorage for check Tokens
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -51,12 +52,17 @@ const App = () => {
          const registrationUserGoogleState = await AsyncStorage.getItem('registrationUserGoogleState');
          const registrationUserEmailState = await AsyncStorage.getItem('registrationUserEmailState');
          const registrationUserPhoneState = await AsyncStorage.getItem('registrationUserPhoneState');
+         const registrationUserTelegramState = await AsyncStorage.getItem('registrationUserTelegramState');
 
          // await AsyncStorage.removeItem('userGoogleToken');
          // await AsyncStorage.removeItem('userEmailToken');
          // await AsyncStorage.removeItem('userPhoneToken');
 
-        if ( registrationUserGoogleState || registrationUserEmailState || registrationUserPhoneState ) {
+        if ( registrationUserGoogleState ||
+             registrationUserEmailState ||
+             registrationUserPhoneState ||
+             registrationUserTelegramState
+        ) {
            setInitialRoute('LoginUserName');
         } else {
            setInitialRoute('Login');
@@ -125,6 +131,10 @@ const App = () => {
               <Stack.Screen
                  name="VerificationPhone"
                  component={VerificationPhone}
+              />
+              <Stack.Screen
+                 name="VerificationTelegram"
+                 component={VerificationTelegram}
               />
               <Stack.Screen
                  name="LoginUserName"

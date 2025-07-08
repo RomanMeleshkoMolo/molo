@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {ActivityIndicator, Alert, View} from 'react-native';
+import {ActivityIndicator, Alert, Platform, View} from 'react-native';
 
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";

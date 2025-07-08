@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Text } from 'react-native';
+import { Animated, Text, Platform } from 'react-native';
 
 // Connect style
 import styles from "ModalStyles/ModalInfo.scss";
@@ -12,7 +12,7 @@ const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
     // Show animation
     Animated.parallel([
       Animated.timing(slideAnim, {
-        toValue: 20, // Final position
+        toValue: Platform.OS === 'ios' ? 40 : 20, // Final position
         duration: 300,
         useNativeDriver: true,
       }),

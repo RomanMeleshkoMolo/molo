@@ -12,6 +12,7 @@ import Logo from "Components/Logo/Logo";
 import InfoUserLogin from "Components/Footer/InfoUserLogin";
 import Bubble from "Components/Effects/Bubble"
 import GoogleSignInButton from "Components/Buttons/GoogleSignInButton";
+import TelegramRegisterButton from "Components/Buttons/TelegramRegisterButton";
 
 // Connect styles
 import styles from "LoginStyles/Login.scss";
@@ -41,6 +42,10 @@ const Login = ({ navigation }) => {
      navigation.navigate('LoginPhone');
  }
 
+ const handleCreateAccountTelegram = () => {
+     navigation.navigate('VerificationTelegram');
+ }
+
  return (
     <View style={[styles.container]}>
 
@@ -63,6 +68,16 @@ const Login = ({ navigation }) => {
            buttonText="Продолжить по телефону"
            handle={handleCreateAccountPhone}
        ></ButtonNameIcon>
+
+       <ButtonNameIcon
+         leftIcon="true"
+         iconBtn="paper-plane-outline"
+         // disable={false}
+         buttonText="Продолжить c Telegram"
+         handle={handleCreateAccountTelegram}
+       ></ButtonNameIcon>
+
+       {/*<TelegramRegisterButton></TelegramRegisterButton>*/}
 
        <GoogleSignInButton></GoogleSignInButton>
 

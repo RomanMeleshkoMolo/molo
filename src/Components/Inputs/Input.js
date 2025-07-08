@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import {View, Text, TextInput, Animated, Alert} from 'react-native';
+import React, { useState } from 'react';
+import {View, Text, TextInput, Animated} from 'react-native';
 
 // Connect styles
 import styles from "InputStyles/Input.scss";
 
-const Input = ({ style, placeholder, onValidEmail, userCode, keyboardType, userName }) => {
+const Input = ({ style, placeholder, onValid, userCode, autoFocus, keyboardType, userName }) => {
   const [text, setText] = useState('');
   const [error, setError] = useState(false);
   const shakeAnimation = React.useRef(new Animated.Value(0)).current;
@@ -46,16 +46,16 @@ const Input = ({ style, placeholder, onValidEmail, userCode, keyboardType, userN
     setText( input );
     validateInput( input );
 
-    if(userName) {
+    if( userName ) {
       userName( input )
     }
 
-    if (userCode) {
+    if ( userCode ) {
       userCode( input );
     }
 
-    if (onValidEmail) {
-      onValidEmail(input.trim() !== '');
+    if ( onValid ) {
+      onValid(input.trim() !== '');
     }
   };
 
@@ -71,7 +71,7 @@ const Input = ({ style, placeholder, onValidEmail, userCode, keyboardType, userN
               onChangeText={ handleChangeText }
               onBlur={() => validateInput(text)}
               keyboardType={ keyboardType }
-              autoFocus={ true }
+              autoFocus={ autoFocus }
            />
         </Animated.View>
         {error &&
