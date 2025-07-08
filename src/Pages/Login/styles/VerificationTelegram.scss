@@ -1,0 +1,36 @@
+$background-app: #d9dcd6;
+$padding-horizontal: 20px;
+$padding-vertical: 40px;
+
+.container {
+  display: flex;
+  flex: 1;
+  padding: $padding-vertical $padding-horizontal;
+  background-color: $background-app;
+}
+
+.header {
+  font-size: 18px;
+  padding: 10px;
+  text-align: center;
+}
+
+.input {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.subTitle {
+   margin-bottom: 20px;
+}
+
+.link {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
