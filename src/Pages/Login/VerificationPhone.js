@@ -97,7 +97,7 @@ const VerificationPhone = ({ navigation, route }) => {
 
         <Input
            style={styles.input}
-           onValidEmail={handleValidEmail}
+           onValid={handleValidEmail}
            userCode={handleUserCode}
            // errorUser={errorUserCode}
            // modalColor={modalColor}

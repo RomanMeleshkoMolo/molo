@@ -49,7 +49,7 @@ const VerificationTelegram = ({ route }) => {
   const checkCodeUser = async () => {
     const apiTelegram = Platform.OS === 'ios'
       ? 'http://localhost:3000/api/telegramVerifyCode'
-      : 'http://10.0.2.2:3000/api/telegramVerifyCode';
+      : 'http://192.168.0.100:3000/api/telegramVerifyCode';
 
     try {
       const response = await fetch(apiTelegram, {

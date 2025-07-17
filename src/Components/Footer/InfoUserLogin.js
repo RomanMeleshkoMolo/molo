@@ -20,19 +20,19 @@ const InfoUserLogin = ({ navigation }) => {
   return (
      <View style={styles.footerLogin}>
 
-        <Text style={styles.footerInfoOne}>
+        <Text style={styles.footerInfo}>
            Мы не передаем твои данные без твоего разрешения
         </Text>
-        <Text style={styles.footerInfoTwo}>
+        <Text style={styles.footerInfo}>
            Создавая аккаунт, ты соглашаешься с нашими
-           <TouchableOpacity  style={styles.wrapperUser} onPress={() => userConditionInfo()}>
-              <Text style={styles.userConditionInfo}> Условиями пользования</Text>
-           </TouchableOpacity>
-
-           <TouchableOpacity style={styles.wrapperUser} onPress={() => userPoliticoInfo()}>
-             <Text style={styles.userConditionInfo}> Политикой конфиденциальности</Text>
-           </TouchableOpacity>
         </Text>
+
+        <View style={styles.footerInfoUser}>
+           <Text style={styles.userConditionInfo}  onPress={() => userConditionInfo()}>Условиями пользования</Text>
+        </View>
+        <View>
+           <Text style={styles.userConditionInfo} onPress={() => userPoliticoInfo()}>Политикой конфиденциальности</Text>
+        </View>
 
      </View>
   );

@@ -17,9 +17,9 @@ const ButtonNameIcon = ({ leftIcon, rightIcon, iconBtn, buttonText, handle, disa
             onPress={!disable ? handle : null} // Disable onPress if disable is false
             activeOpacity={disable ? 0.7 : 1} // Adjust opacity based on disable
         >
-            {leftIcon && <Ionicons name={iconBtn} size={30} />}
+            {leftIcon && <Ionicons name={iconBtn} size={22} />}
             <Text style={styles.globalBtnText}>{buttonText}</Text>
-            {rightIcon && <Ionicons name={iconBtn} size={30} />}
+            {rightIcon && <Ionicons name={iconBtn} size={22} />}
         </TouchableOpacity>
     );
 };

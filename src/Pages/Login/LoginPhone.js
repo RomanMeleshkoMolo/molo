@@ -29,7 +29,7 @@ const LoginPhone = ({ navigation }) => {
 
       const apiPhone = Platform.OS === 'ios'
            ? 'http://localhost:3000/register-phone'
-           : 'http://10.0.2.2:3000/register-phone';
+           : 'http://192.168.0.100:3000/register-phone';
 
       const response = await fetch(apiPhone, {
         method: 'POST',

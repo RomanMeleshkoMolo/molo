@@ -54,9 +54,11 @@ const App = () => {
          const registrationUserPhoneState = await AsyncStorage.getItem('registrationUserPhoneState');
          const registrationUserTelegramState = await AsyncStorage.getItem('registrationUserTelegramState');
 
-         // await AsyncStorage.removeItem('userGoogleToken');
-         // await AsyncStorage.removeItem('userEmailToken');
-         // await AsyncStorage.removeItem('userPhoneToken');
+         // await AsyncStorage.removeItem('registrationUserGoogleState');
+         // await AsyncStorage.removeItem('registrationUserEmailState');
+         // await AsyncStorage.removeItem('registrationUserPhoneState');
+         // await AsyncStorage.removeItem('registrationUserTelegramState');
+
 
         if ( registrationUserGoogleState ||
              registrationUserEmailState ||

@@ -86,7 +86,7 @@ const VerificationEmail = ({ route }) => {
         </SubTitle>
 
         <Input
-          onValidEmail={handleValidEmail}
+          onValid={handleValidEmail}
           userCode={handleUserCode}
           errorUser={errorUserCode}
         />
