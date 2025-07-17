@@ -12,7 +12,6 @@ import Logo from "Components/Logo/Logo";
 import InfoUserLogin from "Components/Footer/InfoUserLogin";
 import Bubble from "Components/Effects/Bubble"
 import GoogleSignInButton from "Components/Buttons/GoogleSignInButton";
-import TelegramRegisterButton from "Components/Buttons/TelegramRegisterButton";
 
 // Connect styles
 import styles from "LoginStyles/Login.scss";
@@ -76,8 +75,6 @@ const Login = ({ navigation }) => {
          buttonText="Продолжить c Telegram"
          handle={handleCreateAccountTelegram}
        ></ButtonNameIcon>
-
-       {/*<TelegramRegisterButton></TelegramRegisterButton>*/}
 
        <GoogleSignInButton></GoogleSignInButton>
 

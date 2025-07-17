@@ -32,16 +32,21 @@ const GoogleSignInButton = () => {
       console.log(userInfo);
 
       // await AsyncStorage.setItem('userGoogleToken', userInfo.data.idToken);
-      await AsyncStorage.setItem('registrationUserGoogleState', 'true');
+      // await AsyncStorage.setItem('registrationUserGoogleState', 'true');
 
 
       // Alert.alert('Success', `Welcome ${userInfo.data.user.name}`);
       // Обработайте userInfo и зарегистрируйте в вашем приложении
 
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'LoginUserName' }],
-      });
+       if (userInfo.type === "success") {
+
+        await AsyncStorage.setItem('registrationUserGoogleState', 'true');
+
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'LoginUserName' }],
+        });
+      } else {}
 
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

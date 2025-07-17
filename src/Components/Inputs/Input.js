@@ -55,7 +55,14 @@ const Input = ({ style, placeholder, onValid, userCode, autoFocus, keyboardType,
     }
 
     if ( onValid ) {
-      onValid(input.trim() !== '');
+
+      if( input.length >= 6 ) {
+        onValid(true);
+
+      }else if ( input.length <= 6 ) {
+        onValid(false);
+      }
+
     }
   };
 

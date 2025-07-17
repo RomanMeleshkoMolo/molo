@@ -40,7 +40,8 @@ const LoginEmail = ({ navigation }) => {
 
       const apiUrl = Platform.OS === 'ios'
            ? 'http://localhost:3000/send-confirmation'
-           : 'http://10.0.2.2:3000/send-confirmation';
+           : 'http://192.168.0.100:3000/send-confirmation';
+
 
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -53,7 +54,7 @@ const LoginEmail = ({ navigation }) => {
       console.log('Response Status:', response.status);
 
       if (response.ok) {
-        Alert.alert('Код подтверждения отправлен на ваш email.');
+        // Alert.alert('Код подтверждения отправлен на ваш email.');
 
         const data = await response.json();
         const confirmationCode = data.code;
