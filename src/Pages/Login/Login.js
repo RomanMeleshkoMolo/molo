@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import {ScrollView, View} from 'react-native';
 
 // Connect Components
 import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
