@@ -39,6 +39,8 @@ import VerificationTelegram from "Pages/Login/VerificationTelegram";
 // Connect AsyncStorage for check Tokens
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Orientation from 'react-native-orientation-locker';
+
 enableScreens();
 
 const Stack = createNativeStackNavigator();
@@ -73,6 +75,8 @@ const App = () => {
        };
 
        checkLoginStatus();
+
+       Orientation.lockToPortrait();
   }, []);
 
 
