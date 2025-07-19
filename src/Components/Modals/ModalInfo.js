@@ -4,7 +4,7 @@ import { Animated, Text, Platform } from 'react-native';
 // Connect style
 import styles from "ModalStyles/ModalInfo.scss";
 
-const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
+const ModalInfo = ({ message, onHide, backgroundColor, textColor, time }) => {
   const slideAnim = useRef(new Animated.Value(-200)).current; // Start position
   const opacityAnim = useRef(new Animated.Value(0)).current;
 
@@ -40,7 +40,7 @@ const ModalInfo = ({ message, onHide, backgroundColor, textColor }) => {
       ]).start(() => {
         if (onHide) onHide();
       });
-    }, 2000);
+    }, time || 2000);
 
     return () => clearTimeout(timeout);
   }, [slideAnim, opacityAnim, onHide]);

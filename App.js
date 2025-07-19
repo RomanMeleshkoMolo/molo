@@ -36,6 +36,8 @@ import VerificationPhone from "Pages/Login/VerificationPhone";
 import LoginUserName from "Pages/Login/LoginUserName";
 import VerificationTelegram from "Pages/Login/VerificationTelegram";
 
+import NetworkStatus from "Components/Modals/NetworkStatus";
+
 // Connect AsyncStorage for check Tokens
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -87,6 +89,7 @@ const App = () => {
   return (
      <Provider>
         <SafeAreaProvider>
+          <NetworkStatus style={{ margin: 50 }}>
            <NavigationContainer>
               <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
               <Stack.Screen
@@ -146,8 +149,9 @@ const App = () => {
                  name="LoginUserName"
                  component={LoginUserName}
               />
-          </Stack.Navigator>
-          </NavigationContainer>
+              </Stack.Navigator>
+           </NavigationContainer>
+          </NetworkStatus>
         </SafeAreaProvider>
      </Provider>
 
