@@ -17,11 +17,11 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Connect sound
-import Sound from 'react-native-sound';
-Sound.setCategory('Playback');
+// import Sound from 'react-native-sound';
+// Sound.setCategory('Playback');
 
 // Connect Icons
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 
 // const { PjsipModule } = NativeModules;
 // const pjsipEventEmitter = new NativeEventEmitter(PjsipModule);
@@ -71,21 +71,21 @@ const Phone = () => {
   }, []);
 
   const playSound = () => {
-     const sound = new Sound('dtmf.mp3', Sound.MAIN_BUNDLE, (error) => {
-        if (error) {
-          console.log('Failed to load the sound', error);
-          return;
-        }
-        sound.play(() => {
-          sound.release();
-        });
-     });
+     // const sound = new Sound('dtmf.mp3', Sound.MAIN_BUNDLE, (error) => {
+     //    if (error) {
+     //      console.log('Failed to load the sound', error);
+     //      return;
+     //    }
+     //    sound.play(() => {
+     //      sound.release();
+     //    });
+     // });
   };
 
   useEffect(() => {
      return sound
         ? () => {
-          sound.release();
+          // sound.release();
         }
       : undefined;
   }, [sound]);
@@ -127,22 +127,22 @@ const Phone = () => {
 
         <View style={styles.icon_container}>
            <TouchableOpacity onPress={toggleMenu}>
-             <Icon name="menu-outline" size={30} style={styles.iconMenu} />
+             {/*<Icon name="menu-outline" size={30} style={styles.iconMenu} />*/}
            </TouchableOpacity>
 
            <View style={styles.iconGroup}>
-              <Icon
-                 name="person-circle-outline"
-                 size={34}
-                 onPress={() => setModalContactVisible(true)}
-                 style={styles.icon_setting}
-              />
-              <Icon
-                 name="settings-outline"
-                 size={30}
-                 onPress={() => setModalVisible(true)}
-                 style={styles.icon_setting}
-              />
+              {/*<Icon*/}
+              {/*   name="person-circle-outline"*/}
+              {/*   size={34}*/}
+              {/*   onPress={() => setModalContactVisible(true)}*/}
+              {/*   style={styles.icon_setting}*/}
+              {/*/>*/}
+              {/*<Icon*/}
+              {/*   name="settings-outline"*/}
+              {/*   size={30}*/}
+              {/*   onPress={() => setModalVisible(true)}*/}
+              {/*   style={styles.icon_setting}*/}
+              {/*/>*/}
            </View>
         </View>
 
@@ -190,17 +190,17 @@ const Phone = () => {
         <View style={styles.actionButtons}>
            <TouchableOpacity style={styles.videoButton}>
               <Text style={styles.videoButtonText}>
-                 <Icon name="videocam" size={30} style={styles.icon_setting} />
+                 {/*<Icon name="videocam" size={30} style={styles.icon_setting} />*/}
               </Text>
            </TouchableOpacity>
            <TouchableOpacity style={styles.callButton}>
               <Text style={styles.callButtonText}>
-                 <Icon name="call" size={30} style={styles.icon_setting} />
+                 {/*<Icon name="call" size={30} style={styles.icon_setting} />*/}
               </Text>
            </TouchableOpacity>
            <TouchableOpacity style={styles.deleteButton} onPress={deleteNumber}>
               <Text style={styles.buttonDelete}>
-                 <Icon name="arrow-back" size={30} style={styles.icon_setting} />
+                 {/*<Icon name="arrow-back" size={30} style={styles.icon_setting} />*/}
               </Text>
            </TouchableOpacity>
         </View>
