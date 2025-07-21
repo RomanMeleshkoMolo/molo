@@ -8,7 +8,7 @@ import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 // Connect Navigation
 import { useNavigation } from '@react-navigation/native';
 
-// Connect .ENV
+// Connect .env
 import { WEB_CLIENT_ID } from '@env';
 
 // Connect AsyncStorage for check Tokens
