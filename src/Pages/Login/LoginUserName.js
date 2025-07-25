@@ -5,7 +5,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { View, Alert } from 'react-native';
+import {View, Alert, Platform} from 'react-native';
 
 // Connect components
 import Title from "Components/Titles/Title";
@@ -30,15 +30,55 @@ const LoginUserName = ({ navigation }) => {
     }
   };
 
-  const goToNextPage = () => {
-    if (isNameValid) {
-      Alert.alert("User Name", nameUser);
+  // const goToNextPage = () => {
+  //   if (isNameValid) {
+  //     Alert.alert("User Name", nameUser);
+  //     // Navigate to the next page if needed
+  //     // navigation.navigate('NextPage');
+  //   } else {
+  //     Alert.alert("Invalid Name", "Please enter a valid name.");
+  //   }
+  // };
+
+
+  const goToNextPage = async () => {
+
+   const apiUrl = Platform.OS === 'ios'
+           ? 'http://localhost:3000/updateUserName'
+           : 'http://192.168.0.100:3000/updateUserName';
+
+
+  if (isNameValid) {
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: '1', // Replace with the actual userId
+          name: nameUser,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update user name');
+      }
+
+      const updatedUser = await response.json();
+      Alert.alert('Success', `User name updated to: ${updatedUser.name}`);
+
       // Navigate to the next page if needed
       // navigation.navigate('NextPage');
-    } else {
-      Alert.alert("Invalid Name", "Please enter a valid name.");
+    } catch (error) {
+      Alert.alert('Error', error.message);
     }
-  };
+  } else {
+    Alert.alert('Invalid Name', 'Please enter a valid name.');
+  }
+ };
+
+
 
   // Use effect to replace the current screen
   useEffect(() => {
