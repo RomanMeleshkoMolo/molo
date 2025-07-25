@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Linking, Platform, ActivityIndicator} from 'react-native';
 
 // Connect components
@@ -28,6 +28,15 @@ const VerificationTelegram = ({ route }) => {
   const [isCodeValid, setIsCodeValid] = useState(true);
   const [colorModal, setColorModal] = useState('#ffcc00');
   const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState('Мы отправим код подтверждения в Телеграм');
+  const [subTitle, setSubTitle] = useState('Тебе нужно будет ввести его ниже и все:)');
+
+   useEffect(() => {
+    if (textBtn === 'Дальше') {
+      setTitle('Мы уже отправили код тебе в телеграмм');
+      setSubTitle('Введите полученный код ниже');
+    }
+  }, [textBtn]);
 
 
   const openTelegramBot = () => {
@@ -108,7 +117,6 @@ const VerificationTelegram = ({ route }) => {
 
       setIsCodeValid(false);
       setErrorUserCode(false);
-
     }
   };
 
@@ -130,10 +138,12 @@ const VerificationTelegram = ({ route }) => {
           Теперь нам нужно убедиться что полученный код пренадлежит тебе
         </Title>
         <SubTitle style={styles.subTitle}>
-           Мы отправили код подтверждения в Телеграм.
+           {/*Мы отправим код подтверждения в Телеграм.*/}
+            { title }
         </SubTitle>
         <SubTitle style={styles.subTitle}>
-          Просто введите его ниже и все:)
+          {/*Тебе нужно будет ввести его ниже и все:)*/}
+            { subTitle }
         </SubTitle>
 
         <Input

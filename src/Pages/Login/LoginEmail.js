@@ -39,8 +39,8 @@ const LoginEmail = ({ navigation }) => {
       console.log('Email:', email);
 
       const apiUrl = Platform.OS === 'ios'
-           ? 'http://localhost:3000/send-confirmation'
-           : 'http://192.168.0.100:3000/send-confirmation';
+           ? 'http://localhost:3000/register-email'
+           : 'http://192.168.0.100:3000/register-email';
 
 
       const response = await fetch(apiUrl, {
