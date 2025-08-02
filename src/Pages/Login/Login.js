@@ -72,7 +72,7 @@ const Login = ({ navigation }) => {
          leftIcon="true"
          iconBtn="paper-plane-outline"
          // disable={false}
-         buttonText="Продолжить c Telegram" 
+         buttonText="Продолжить c Telegram"
          handle={handleCreateAccountTelegram}
        ></ButtonNameIcon>
 

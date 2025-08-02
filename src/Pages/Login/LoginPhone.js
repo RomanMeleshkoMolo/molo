@@ -29,7 +29,7 @@ const LoginPhone = ({ navigation }) => {
 
       const apiPhone = Platform.OS === 'ios'
            ? 'http://localhost:3000/register-phone'
-           : 'http://192.168.0.100:3000/register-phone';
+           : 'http://192.168.0.107:3000/register-phone';
 
       const response = await fetch(apiPhone, {
         method: 'POST',
@@ -47,6 +47,7 @@ const LoginPhone = ({ navigation }) => {
       } else {
         Alert.alert("Ошибка", result.message || "Не удалось отправить код.");
       }
+
     } catch (error) {
       Alert.alert("Ошибка", "Не удалось связаться с сервером.");
     } finally {
@@ -74,7 +75,7 @@ const LoginPhone = ({ navigation }) => {
         </View>
 
         <Title>
-          Отлично! Укажи свой номер телефона
+          Отлично! Укажи свой номер телефона!
         </Title>
 
         <SubTitle>

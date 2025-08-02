@@ -45,7 +45,7 @@ const LoginUserName = ({ navigation }) => {
 
    const apiUrl = Platform.OS === 'ios'
            ? 'http://localhost:3000/updateUserName'
-           : 'http://192.168.0.100:3000/updateUserName';
+           : 'http://192.168.0.107:3000/updateUserName';
 
 
   if (isNameValid) {
@@ -56,7 +56,7 @@ const LoginUserName = ({ navigation }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          userId: '1', // Replace with the actual userId
+          // userId: '1', // Replace with the actual userId
           name: nameUser,
         }),
       });
