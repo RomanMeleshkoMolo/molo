@@ -40,7 +40,7 @@ const LoginEmail = ({ navigation }) => {
 
       const apiUrl = Platform.OS === 'ios'
            ? 'http://localhost:3000/register-email'
-           : 'http://192.168.0.100:3000/register-email';
+           : 'http://192.168.0.107:3000/register-email';
 
 
       const response = await fetch(apiUrl, {
