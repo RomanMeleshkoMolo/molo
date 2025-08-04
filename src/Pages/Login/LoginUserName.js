@@ -15,10 +15,13 @@ import Input from "Components/Inputs/Input";
 
 // Connect styles
 import styles from "LoginStyles/LoginUserName.scss";
+import {useSelector} from "react-redux";
 
 const LoginUserName = ({ navigation }) => {
   const [nameUser, setNameUser] = useState('');
   const [isNameValid, setIsNameValid] = useState(false);
+
+  const userData = useSelector(state => state.userData);
 
   const handleUserNameChange = (name) => {
     setNameUser(name);
@@ -57,6 +60,7 @@ const LoginUserName = ({ navigation }) => {
         },
         body: JSON.stringify({
           // userId: '1', // Replace with the actual userId
+          userId: userData.userId,
           name: nameUser,
         }),
       });

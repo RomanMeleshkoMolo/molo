@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {View, Linking, Platform, ActivityIndicator} from 'react-native';
 
+// Connect Store redux
+import { useDispatch } from 'react-redux';
+import { setUserData } from 'redux/actions';
+
+import { useSelector } from 'react-redux';
+
 // Connect components
 import GoBackButton from "Components/Buttons/GoBackButton";
 import Title from "Components/Titles/Title";
@@ -19,6 +25,19 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const VerificationTelegram = ({ route }) => {
+  const dispatch = useDispatch();
+
+
+  // const userData = useSelector(state => state.userData);
+  //
+  //    useEffect(() => {
+  //      console.log("User data from store:", userData);
+  //      if (userData) {
+  //        alert("User ID: " + userData.userId);
+  //      }
+  //    }, [userData]);
+
+
   const navigation = useNavigation();
 
   const [textBtn, setTextBtn] = useState('Открыть телеграм бот');
@@ -69,26 +88,26 @@ const VerificationTelegram = ({ route }) => {
         body: JSON.stringify({ userCode: userCode.trim() }),
       });
 
-      const data = await response.json();
+      const user = await response.json();
 
-      // alert( data.userId );
+      if ( response.ok ) {
 
-      if ( response.ok && data.userId ) {
+        dispatch( setUserData( user ) );
+
+        if( checkUserCode( user.confirmationCode ) ) {
+
+          // Go to other page
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'LoginUserName' }],
+          });
 
 
-
-          // await AsyncStorage.setItem('userId', data.userId );
-          // alert( await AsyncStorage.getItem( 'userId' ) );
-
-          if( checkUserCode( data.confirmationCode ) ) {
-               setErrorUserCode(true);
-               setColorModal('#a7c957');
-               setInfo('Супер!!! Код правильный');
-          } else {
-              setErrorUserCode(true);
-              setColorModal('#e56b6f');
-              setInfo( "Введен неверный код.Проверьте код еще раз");
-          }
+        } else {
+          setErrorUserCode(true);
+          setColorModal('#e56b6f');
+          setInfo( "Введен неверный код.Проверьте код еще раз");
+        }
 
       }
 
@@ -104,20 +123,20 @@ const VerificationTelegram = ({ route }) => {
      return code === userCode;
   }
 
-  const checkInputUserCode = (input) => {
-    setUserCode(input);
+  const checkInputUserCode = ( input ) => {
+    setUserCode( input );
 
-    if (textBtn === 'Дальше' && input.length > 6) {
+    if ( textBtn === 'Дальше' && input.length > 6 ) {
 
       setIsCodeValid(true);
       setErrorUserCode(true);
       setInfo('Код не должен превышать 6 символов');
 
-    } else if (textBtn === 'Дальше' && input.length > 5) {
+    } else if ( textBtn === 'Дальше' && input.length > 5 ) {
 
       setIsCodeValid(true);
 
-    } else if (textBtn === 'Дальше') {
+    } else if ( textBtn === 'Дальше' ) {
 
       setIsCodeValid(false);
       setErrorUserCode(false);
@@ -125,9 +144,10 @@ const VerificationTelegram = ({ route }) => {
   };
 
   const checkNameButton = () => {
-    if (textBtn === 'Открыть телеграм бот') {
+
+    if ( textBtn === 'Открыть телеграм бот' ) {
       openTelegramBot();
-    } else if (textBtn === 'Дальше') {
+    } else if ( textBtn === 'Дальше' ) {
       sendCodeUserToBackend();
     }
   };
