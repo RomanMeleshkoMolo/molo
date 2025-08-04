@@ -20,6 +20,10 @@ const path = require('path');
              // Alias for Pages
              'Pages': path.resolve(__dirname, 'src/Pages'),
              'LoginStyles': path.resolve(__dirname, 'src/Pages/Login/styles'),
+
+             // Alias for redux
+             'redux/actions': path.resolve(__dirname, 'src/redux/actions.js'),
+             'redux/store': path.resolve(__dirname, 'src/redux/store.js'),
            },
          },
        ],

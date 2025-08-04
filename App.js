@@ -15,7 +15,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
-import { Provider } from "react-native-paper";
+// import { Provider } from "react-native-paper";
+
+// Connect store from redux
+import { Provider } from 'react-redux';
+import store from 'redux/store';
 
 
 // It is old Pages
@@ -87,7 +91,7 @@ const App = () => {
   }
 
   return (
-     <Provider>
+     <Provider store={store}>
         <SafeAreaProvider>
           <NetworkStatus style={{ margin: 50 }}>
            <NavigationContainer>

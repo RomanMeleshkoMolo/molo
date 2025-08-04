@@ -11,7 +11,9 @@
             "TitleStyles/*":  ["src/Components/Titles/styles/*"],
 
             "Pages/*":  ["src/Pages/*"],
-            "LoginStyles/*":  ["src/Pages/Login/styles/*"]
+            "LoginStyles/*":  ["src/Pages/Login/styles/*"],
+            "redux/actions": ["src/redux/actions.js"],
+            "redux/store": ["src/redux/store.js"]
         }
     }
 }
