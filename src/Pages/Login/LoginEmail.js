@@ -9,18 +9,28 @@ import SubTitle from "Components/Titles/SubTitle";
 import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import TitleWithIcon from "Components/Titles/TitleWithIcon";
 import InputEmail from "Components/Inputs/InputEmail";
+import ModalInfo from "Components/Modals/ModalInfo";
 
 // Connect Global Styles
 import style from "LoginStyles/LoginEmail.scss";
 import styles from "LoginStyles/LoginPhone.scss";
+// import {setUserData} from "redux/actions";
+
+// Connect Store redux
+import { useDispatch } from 'react-redux';
+import { setUserData } from 'redux/actions';
 
 const LoginEmail = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState('');
+  const [errorUserCode, setErrorUserCode] = useState(false);
+
+  const dispatch = useDispatch();
 
   const goBack = () => {
-    navigation.navigate('LoginPhone');
+    navigation.navigate('VerificationTelegram');
   };
 
   const handleValidEmail = (isValid) => {
@@ -53,22 +63,28 @@ const LoginEmail = ({ navigation }) => {
 
       console.log('Response Status:', response.status);
 
-      if (response.ok) {
-        // Alert.alert('Код подтверждения отправлен на ваш email.');
+      if ( response.ok ) {
 
-        const data = await response.json();
-        const confirmationCode = data.code;
+        const user = await response.json();
 
-        console.log( confirmationCode );
+        // Save to store
+        dispatch( setUserData( user ) );
+
+        const { confirmationCode, email } = user;
 
         // Возможно, навигация на следующий экран
         navigation.navigate('VerificationEmail', { confirmationCode, email });
       } else {
-        Alert.alert('Ошибка отправки. Попробуйте снова.');
+
+        setErrorUserCode(true);
+        setInfo('Ошибка отправки. Попробуйте снова.');
+
       }
     } catch (error) {
-      console.error('Error:', error);
-      Alert.alert('Ошибка сети. Попробуйте снова.');
+
+       setErrorUserCode(true);
+       setInfo('Ошибка сети. Попробуйте снова.');
+
     } finally {
       setLoading(false);
     }
@@ -91,7 +107,7 @@ const LoginEmail = ({ navigation }) => {
       />
 
       <ButtonNameIcon
-        buttonText="Регистрация по телефону"
+        buttonText="Регистрация по Telegram"
         handle={goBack}
       />
 
@@ -110,6 +126,15 @@ const LoginEmail = ({ navigation }) => {
           />
         )}
       </View>
+
+       {errorUserCode && (
+          <ModalInfo
+             message={ info }
+             backgroundColor={'#ffcc00'}
+             textColor="#000"
+             onHide={() => setErrorUserCode(false)}
+          />
+       )}
 
     </View>
   );

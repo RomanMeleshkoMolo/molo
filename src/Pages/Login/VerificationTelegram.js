@@ -57,6 +57,10 @@ const VerificationTelegram = ({ route }) => {
     }
   }, [textBtn]);
 
+   const goBack = () => {
+    navigation.navigate('LoginEmail');
+  };
+
 
   const openTelegramBot = () => {
     const botUsername = 'MoloChatBot';
@@ -93,6 +97,9 @@ const VerificationTelegram = ({ route }) => {
       if ( response.ok ) {
 
         dispatch( setUserData( user ) );
+
+        console.log("------user-------");
+        console.log( user );
 
         if( checkUserCode( user.confirmationCode ) ) {
 
@@ -175,6 +182,11 @@ const VerificationTelegram = ({ route }) => {
           errorUser={errorUserCode}
 
           autoFocus={false}
+        />
+
+        <ButtonNameIcon
+          buttonText="Регистрация по Email"
+          handle={goBack}
         />
 
         <View style={styles.footer}>

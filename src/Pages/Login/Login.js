@@ -60,13 +60,13 @@ const Login = ({ navigation }) => {
            handle={handleCreateAccountEmail}
        ></ButtonNameIcon>
 
-       <ButtonNameIcon
-           leftIcon="true"
-           iconBtn="call-outline"
-           disable={false}
-           buttonText="Продолжить по телефону"
-           handle={handleCreateAccountPhone}
-       ></ButtonNameIcon>
+       {/*<ButtonNameIcon*/}
+       {/*    leftIcon="true"*/}
+       {/*    iconBtn="call-outline"*/}
+       {/*    disable={false}*/}
+       {/*    buttonText="Продолжить по телефону"*/}
+       {/*    handle={handleCreateAccountPhone}*/}
+       {/*></ButtonNameIcon>*/}
 
        <ButtonNameIcon
          leftIcon="true"
