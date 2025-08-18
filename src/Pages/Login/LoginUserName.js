@@ -22,6 +22,8 @@ const LoginUserName = ({ navigation }) => {
   const [isNameValid, setIsNameValid] = useState(false);
 
   const userData = useSelector(state => state.userData);
+  console.log("------form store---------");
+  console.log( userData );
 
   const handleUserNameChange = (name) => {
     setNameUser(name);

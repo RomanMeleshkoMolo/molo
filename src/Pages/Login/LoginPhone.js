@@ -41,11 +41,19 @@ const LoginPhone = ({ navigation }) => {
 
       const result = await response.json();
 
-      if (response.ok && result.success) {
-        const phoneTwilio = result.phoneTwilio;
-        navigation.navigate('VerificationPhone', { phone, phoneTwilio });
+      console.log( result.user );
+
+      if ( response.ok ) {
+
+          // console.log( result.user );
+
+        // const phoneTwilio = result.phoneTwilio;
+        // navigation.navigate('VerificationPhone', { phone, phoneTwilio });
+
       } else {
+
         Alert.alert("Ошибка", result.message || "Не удалось отправить код.");
+
       }
 
     } catch (error) {
