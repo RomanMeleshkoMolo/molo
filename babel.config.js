@@ -16,6 +16,7 @@ const path = require('path');
              'LogoStyles': path.resolve(__dirname, 'src/Components/Logo/styles'),
              'ModalStyles': path.resolve(__dirname, 'src/Components/Modals/styles'),
              'TitleStyles': path.resolve(__dirname, 'src/Components/Titles/styles'),
+             'CardsStyles': path.resolve(__dirname, 'src/Components/Cards/styles'),
 
              // Alias for Pages
              'Pages': path.resolve(__dirname, 'src/Pages'),

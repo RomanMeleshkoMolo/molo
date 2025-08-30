@@ -5,22 +5,22 @@
  * @format
  */
 
- /**
+/**
  * © [2025] Molo. All rights reserved.
  * Molo is a private development, and all rights are owned by the app's owner.
  */
 
-import React, {useEffect, useState} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+// App.js
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { ActivityIndicator, View } from 'react-native';
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { enableScreens } from 'react-native-screens';
-// import { Provider } from "react-native-paper";
 
 // Connect store from redux
 import { Provider } from 'react-redux';
 import store from 'redux/store';
-
 
 // It is old Pages
 import Phone from "./src/Pages/Phone";
@@ -39,6 +39,7 @@ import VerificationEmail from "Pages/Login/VerificationEmail";
 import VerificationPhone from "Pages/Login/VerificationPhone";
 import LoginUserName from "Pages/Login/LoginUserName";
 import VerificationTelegram from "Pages/Login/VerificationTelegram";
+import LoginUserInterest from "Pages/Login/LoginUserInterest";
 
 import NetworkStatus from "Components/Modals/NetworkStatus";
 
@@ -51,115 +52,132 @@ enableScreens();
 
 const Stack = createNativeStackNavigator();
 
+ // Ключи и константы персиста
+ const LAST_ROUTE_KEY = '@authFlow:lastRoute';
+ const PERSIST_ENABLED_KEY = '@authFlow:persistEnabled';
+ const DEFAULT_ROUTE = 'Login';
+ const START_ROUTE = 'LoginUserName';
+
+ // Навигационный ref
+ export const navigationRef = createNavigationContainerRef();
+
+ // Хелперы для флага персиста
+ async function setPersistEnabled(enabled) {
+   if (enabled) {
+     await AsyncStorage.setItem(PERSIST_ENABLED_KEY, '1');
+   } else {
+     await AsyncStorage.removeItem(PERSIST_ENABLED_KEY);
+     await AsyncStorage.removeItem(LAST_ROUTE_KEY);
+   }
+ }
+ async function getPersistEnabled() {
+   const v = await AsyncStorage.getItem(PERSIST_ENABLED_KEY);
+   return v === '1';
+ }
+
 const App = () => {
-  const [initialRoute, setInitialRoute] = useState(null);
+  const [initialRoute, setInitialRoute] = useState(DEFAULT_ROUTE);
+  const [rehydrated, setRehydrated] = useState(false);
+  const persistEnabledRef = useRef(false);
 
-  // Checking Token and redirect
   useEffect(() => {
-     const checkLoginStatus = async () => {
-         const registrationUserGoogleState = await AsyncStorage.getItem('registrationUserGoogleState');
-         const registrationUserEmailState = await AsyncStorage.getItem('registrationUserEmailState');
-         const registrationUserPhoneState = await AsyncStorage.getItem('registrationUserPhoneState');
-         const registrationUserTelegramState = await AsyncStorage.getItem('registrationUserTelegramState');
+    Orientation.lockToPortrait();
 
-         // await AsyncStorage.removeItem('registrationUserGoogleState');
-         // await AsyncStorage.removeItem('registrationUserEmailState');
-         // await AsyncStorage.removeItem('registrationUserPhoneState');
-         // await AsyncStorage.removeItem('registrationUserTelegramState');
+    const bootstrap = async () => {
+      try {
+        // 1) Проверяем, включен ли персист (после достижения LoginUserName)
+        const persistEnabled = await getPersistEnabled();
+        persistEnabledRef.current = persistEnabled;
 
+        // 2) Если персист включен — пробуем восстановить последний маршрут
+        if (persistEnabled) {
+          const lastRoute = await AsyncStorage.getItem(LAST_ROUTE_KEY);
 
-        if ( registrationUserGoogleState ||
-             registrationUserEmailState ||
-             registrationUserPhoneState ||
-             registrationUserTelegramState
-        ) {
-           setInitialRoute('LoginUserName');
-        } else {
-           setInitialRoute('Login');
+          if (lastRoute) {
+            setInitialRoute(lastRoute);
+            setRehydrated(true);
+            return;
+          }
         }
 
-       };
+        // 3) Иначе — стартуем с дефолтного экрана
+        setInitialRoute(DEFAULT_ROUTE);
+      } catch (e) {
+        setInitialRoute(DEFAULT_ROUTE);
+      } finally {
+        setRehydrated(true);
+      }
+    };
 
-       checkLoginStatus();
-
-       Orientation.lockToPortrait();
+    bootstrap();
   }, []);
 
+  // Сохраняем текущий маршрут
+  const handleNavStateChange = useCallback(async () => {
+    try {
+      const route = navigationRef.getCurrentRoute();
+      const name = route?.name;
+      if (!name) return;
 
-  if (!initialRoute) {
-    return null; // Или индикатор загрузки
+      // Если впервые попали на START_ROUTE — включаем персист
+      if (name === START_ROUTE && !persistEnabledRef.current) {
+        persistEnabledRef.current = true;
+        await setPersistEnabled(true);
+      }
+
+      // Сохраняем последний маршрут только если персист включен
+      if (persistEnabledRef.current) {
+        await AsyncStorage.setItem(LAST_ROUTE_KEY, name);
+      }
+    } catch {
+      // no-op
+    }
+  }, []);
+
+  if (!rehydrated) {
+    // Лоадер на время восстановления состояния
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <ActivityIndicator />
+      </View>
+    );
   }
 
   return (
-     <Provider store={store}>
-        <SafeAreaProvider>
-          <NetworkStatus style={{ margin: 50 }}>
-           <NavigationContainer>
-              <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
-              <Stack.Screen
-                  name="Login"
-                  component={Login}
-              />
-              <Stack.Screen
-                name="Phone"
-                component={Phone}
-              />
-              <Stack.Screen
-                name="MainNavi"
-                component={MainNavi}
-                options={{title: ""}}
-              />
-              <Stack.Screen
-                name="Account"
-                component={Account}
-              />
-              <Stack.Screen
-                name="Information"
-                component={Information}
-              />
-              <Stack.Screen
-                 name="UserConditionInfo"
-                 component={UserConditionInfo}
-              />
-              <Stack.Screen
-                 name="UserPoliticoInfo"
-                 component={UserPoliticoInfo}
-              />
-              <Stack.Screen
-                 name="LoginEmail"
-                 component={LoginEmail}
-              />
-              <Stack.Screen
-                 name="LoginPhone"
-                 component={LoginPhone}
-              />
-              <Stack.Screen
-                 name="CountryCodeSelector"
-                 component={CountryCodeSelector}
-              />
-              <Stack.Screen
-                 name="VerificationEmail"
-                 component={VerificationEmail}
-              />
-              <Stack.Screen
-                 name="VerificationPhone"
-                 component={VerificationPhone}
-              />
-              <Stack.Screen
-                 name="VerificationTelegram"
-                 component={VerificationTelegram}
-              />
-              <Stack.Screen
-                 name="LoginUserName"
-                 component={LoginUserName}
-              />
-              </Stack.Navigator>
-           </NavigationContainer>
-          </NetworkStatus>
-        </SafeAreaProvider>
-     </Provider>
-
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <NetworkStatus style={{ margin: 50 }}>
+          <NavigationContainer ref={navigationRef} onStateChange={handleNavStateChange}>
+            <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Phone" component={Phone} />
+              <Stack.Screen name="MainNavi" component={MainNavi} options={{ title: "" }} />
+              <Stack.Screen name="Account" component={Account} />
+              <Stack.Screen name="Information" component={Information} />
+              <Stack.Screen name="UserConditionInfo" component={UserConditionInfo} />
+              <Stack.Screen name="UserPoliticoInfo" component={UserPoliticoInfo} />
+              <Stack.Screen name="LoginEmail" component={LoginEmail} />
+              <Stack.Screen name="LoginPhone" component={LoginPhone} />
+              <Stack.Screen name="CountryCodeSelector" component={CountryCodeSelector} />
+              <Stack.Screen name="VerificationEmail" component={VerificationEmail} />
+              <Stack.Screen name="VerificationPhone" component={VerificationPhone} />
+              <Stack.Screen name="VerificationTelegram" component={VerificationTelegram} />
+              <Stack.Screen name="LoginUserName" component={LoginUserName} />
+              <Stack.Screen name="LoginUserInterest" component={LoginUserInterest} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </NetworkStatus>
+      </SafeAreaProvider>
+    </Provider>
   );
-}
+};
 
 export default App;
+
+/*
+Подсказки:
+- Если нужно сбросить персист (например, при логауте), вызовите:
+   await setPersistEnabled(false);
+  После этого навигируйте на нужный стартовый экран (например, Login).
+*/
+

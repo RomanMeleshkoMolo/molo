@@ -9,6 +9,7 @@
             "LogoStyles/*":   ["src/Components/Logo/styles/*"],
             "ModalStyles/*":  ["src/Components/Modals/styles/*"],
             "TitleStyles/*":  ["src/Components/Titles/styles/*"],
+            "CardsStyles/*":  ["src/Components/Cards/styles/*"],
 
             "Pages/*":  ["src/Pages/*"],
             "LoginStyles/*":  ["src/Pages/Login/styles/*"],
