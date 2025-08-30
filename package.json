@@ -25,6 +25,7 @@
     "asterisk-ami-client": "^1.1.5",
     "dotenv": "^16.5.0",
     "expo-av": "^15.0.2",
+    "prop-types": "^15.8.1",
     "react": "19.0.0",
     "react-native": "0.78.0",
     "react-native-contacts": "^7.0.8",

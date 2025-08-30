@@ -71,9 +71,9 @@ const VerificationEmail = ({ route }) => {
   return (
      <View style={[styles.container]}>
 
-        <View style={styles.header}>
-          <GoBackButton navigation={navigation} />
-        </View>
+        {/*<View style={styles.header}>*/}
+        {/*  <GoBackButton navigation={navigation} />*/}
+        {/*</View>*/}
 
         <Title>
             Теперь нам нужно убедиться что полученный код пренадлежит тебе
