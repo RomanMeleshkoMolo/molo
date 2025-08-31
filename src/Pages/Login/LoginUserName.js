@@ -15,9 +15,10 @@ import styles from "LoginStyles/LoginUserName.scss";
 
 // Connect Redux Hooks
 import { useDispatch, useSelector } from "react-redux";
+import { setRegTokenAction, setUserAction } from 'redux/actions';
 
-const setRegTokenAction = (token) => ({ type: 'SET_REG_TOKEN', payload: token });
-const setUserAction = (user) => ({ type: 'SET_USER', payload: user });
+// const setRegTokenAction = (token) => ({ type: 'SET_REG_TOKEN', payload: token });
+// const setUserAction = (user) => ({ type: 'SET_USER', payload: user });
 
 const LoginUserName = ({ navigation }) => {
   const [nameUser, setNameUser] = useState('');
