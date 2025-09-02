@@ -1,0 +1,35 @@
+$background-app: #d9dcd6;
+$padding-horizontal: 20px;
+$padding-vertical: 20px;
+
+.container {
+  display: flex;
+  flex: 1;
+  padding: $padding-vertical $padding-horizontal;
+  background-color: $background-app;
+}
+
+.containerCards {
+  margin-top: 20px;
+}
+
+.header {
+  font-size: 18px;
+  padding: 10px;
+  text-align: center;
+}
+
+.headerTextModal {
+   font-size: 18px;
+}
+
+.input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}

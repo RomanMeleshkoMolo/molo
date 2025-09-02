@@ -15,7 +15,7 @@ const SubTitle = ({ style, children, colorText } ) => {
   };
 
    return (
-      <View>
+      <View style={styles.container}>
 
          <Text style={[styles.title, textStyle, subTitleStyles, style]}>
             {children}
