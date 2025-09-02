@@ -1,90 +1,52 @@
-//  /**
-//  * © [2025] Molo. All rights reserved.
-//  * Molo is a private development, and all rights are owned by the app's owner.
-//  */
-//
-//
-// import React, { useEffect, useState } from 'react';
-// import {View, Alert, Platform} from 'react-native';
-//
-// // Connect components
-// import Title from "Components/Titles/Title";
-// import SubTitle from "Components/Titles/SubTitle";
-// import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
-// import Input from "Components/Inputs/Input";
-//
-// // Connect styles
-// import styles from "LoginStyles/LoginUserName.scss";
-// import {useSelector} from "react-redux";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-//
-// const LoginUserInterest = async ({navigation}) => {
-//
-//     const userData = useSelector(state => state.userData);
-//     console.log("------form store---------");
-//     console.log(userData);
-//
-//     await AsyncStorage.setItem('registrationUserInterest', 'true');
-//
-//     // Use effect to replace the current screen
-//     useEffect( () => {
-//
-//
-//         // navigation.replace('LoginUserName');
-//
-//     }, []);
-//
-//     return (
-//         <View style={styles.container}>
-//
-//             <Title>
-//                 Нам важно знать что тебя интересует больше всего
-//             </Title>
-//
-//             <SubTitle>
-//                 Выбраный ответ даст больше понимания что тебя интересует и возможность подобрать для тебя людей.
-//                 Выбраный ответ ты всегда можеш изменить у себя в профиле.
-//             </SubTitle>
-//
-//
-//
-//         </View>
-//     );
-// };
-//
-// export default LoginUserInterest;
-
-
-
 /**
  * © [2025] Molo. All rights reserved.
  * Molo is a private development, and all rights are owned by the app's owner.
  */
 
-import React, {useEffect, useCallback, useState} from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { View } from 'react-native';
 
 // Connect components
-import Title from "Components/Titles/Title";
-import SubTitle from "Components/Titles/SubTitle";
-import PreferenceCard from "Components/Cards/PreferenceCard";
-import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
-
-// import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
-// import Input from "Components/Inputs/Input";
+import Title from 'Components/Titles/Title';
+import SubTitle from 'Components/Titles/SubTitle';
+import PreferenceCard from 'Components/Cards/PreferenceCard';
+import ButtonNameIcon from 'Components/Buttons/ButtonNameIcon';
 
 // Connect styles
-import styles from "LoginStyles/LoginUserName.scss";
-import { useSelector } from "react-redux";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import styles from 'LoginStyles/LoginUserInterest.scss';
+
+// Connect Redux
+import { useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-// import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 
 const LAST_ROUTE_KEY = '@authFlow:lastRoute';
 
+// Варианты интересов вынесены в конфиг
+const INTEREST_OPTIONS = [
+  {
+    id: 'dates',
+    title: 'Пойти на свидания',
+    subtitle: 'Интересные и приятные встречи, заряжают на новые цели.',
+    icon: 'wine-outline',
+  },
+  {
+    id: 'chat',
+    title: 'Просто общение',
+    subtitle: 'Просто общение, где легко быть собой и приятно слушать друг друга.',
+    icon: 'people-outline',
+  },
+  {
+    id: 'love',
+    title: 'Найти любовь',
+    subtitle: 'Найти любовь — это встреча, которая заставляет улыбаться каждый день.',
+    icon: 'heart-outline',
+  },
+];
+
 const LoginUserInterest = ({ navigation }) => {
-  const userData = useSelector(state => state.userData);
-  const [selected, setSelected] = useState(false);
+  const userData = useSelector((state) => state.userData);
+  const [selectedId, setSelectedId] = useState(null);
 
   // Один раз при загрузке страницы отмечаем, что пользователь дошёл до этапа интересов
   useEffect(() => {
@@ -99,46 +61,45 @@ const LoginUserInterest = ({ navigation }) => {
   );
 
   const goToNextPage = async () => {
-
-      alert("go to page");
-
-  }
+    // Здесь можно сохранить выбор пользователя, если нужно:
+    // await AsyncStorage.setItem('@user:interest', selectedId).catch(() => {});
+    alert(`go to page. Selected: ${selectedId}`);
+    // navigation.navigate('NextScreen'); // пример перехода
+  };
 
   return (
     <View style={styles.container}>
-      <Title>
-        Нам важно знать, что тебя интересует больше всего
-      </Title>
+      <Title>Нам важно знать, что тебя интересует больше всего</Title>
 
       <SubTitle>
         Выбранный ответ даст больше понимания, что тебя интересует, и возможность подобрать для тебя людей.
         Выбранный ответ ты всегда можешь изменить у себя в профиле.
       </SubTitle>
 
-      {/*<PreferenceCard*/}
-      {/*    text="TEST TEST TEST"*/}
-      {/*    nameIcon="heart-outline"*/}
-      {/*/>*/}
+      <View style={styles.containerCards}>
+        {INTEREST_OPTIONS.map((opt) => (
+          <PreferenceCard
+            key={opt.id}
+            title={opt.title}
+            subtitle={opt.subtitle}
+            icon={opt.icon}
+            selected={selectedId === opt.id}
+            onPress={() =>
+              setSelectedId((prev) => (prev === opt.id ? null : opt.id))
+            }
+          />
+        ))}
+      </View>
 
-      <PreferenceCard
-        title="Ходить на свидания"
-        subtitle="Романтика и приятные встречи — всё, что мне нужно."
-        icon='heart-outline'
-        selected={selected}
-        onPress={() => setSelected(s => !s)}
-      />
-
+      <View style={styles.footer}>
         <ButtonNameIcon
-           buttonText="Дальше"
-           handle={goToNextPage}
-           disable={false}
+          buttonText="Дальше"
+          handle={goToNextPage}
+          disable={!selectedId}
         />
-
-
-      {/* Здесь разместите ваши варианты интересов и кнопку продолжения */}
+      </View>
     </View>
   );
 };
 
 export default LoginUserInterest;
-

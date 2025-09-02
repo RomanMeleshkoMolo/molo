@@ -8,36 +8,68 @@ $radius: 16px;
 .container {
   background-color: $bg;
   border-radius: $radius;
-  padding-vertical: 14px;
-  padding-horizontal: 16px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  shadow-color: #000000;
-  shadow-opacity: 0.06;
-  shadow-radius: 8px;
-  shadow-offset: 0px 2px;
-  elevation: 2;
+  margin-bottom: 10px;
+  padding: 19px;
 }
 
-.containerPressed { opacity: 0.85; }
-.containerDisabled { opacity: 0.5; }
+.containerPressed {
+  opacity: 0.85;
+}
+.containerDisabled {
+  opacity: 0.5;
+}
 
-.left { flex-direction: row; align-items: center; flex-shrink: 1; }
+.left {
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 1;
+}
 
-.icon { width: 28px; height: 28px; margin-right: 12px; tint-color: #000000; }
+.icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+  tint-color: #000000;
+}
 
-.texts { flex-shrink: 1; }
+.texts {
+  flex-shrink: 1;
+  padding-left: 17px;
+}
 
-.title { color: $text; font-size: 16px; font-weight: 700; line-height: 20px; }
+.title {
+  color: $text;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
 
-.subtitle { margin-top: 4px; color: $text-muted; font-size: 14px; line-height: 18px; }
+.subtitle {
+  margin-top: 4px;
+  color: $text-muted;
+  font-size: 14px;
+  line-height: 18px;
+}
 
 .radio {
-  width: 24px; height: 24px; border-radius: 999px;
-  border-width: 2px; border-color: #0a0a0a;
-  align-items: center; justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border-width: 2px;
+  border-color: #0a0a0a;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
 }
-.radioSelected { border-color: #0a0a0a; }
-.radioDot { width: 12px; height: 12px; border-radius: 999px; background-color: #0a0a0a; }
+.radioSelected {
+  border-color: #0a0a0a;
+}
+.radioDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background-color: #0a0a0a;
+}
