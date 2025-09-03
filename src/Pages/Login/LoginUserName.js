@@ -16,6 +16,7 @@ import styles from "LoginStyles/LoginUserName.scss";
 // Connect Redux Hooks
 import { useDispatch, useSelector } from "react-redux";
 import { setRegTokenAction, setUserAction } from 'redux/actions';
+ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginUserName = ({ navigation }) => {
   const [nameUser, setNameUser] = useState('');
@@ -27,6 +28,8 @@ const LoginUserName = ({ navigation }) => {
   const regToken = userData?.regToken;
   const email = userData?.email;     // или chatId/phone, что у вас есть
   const chatId = userData?.chatId;
+
+  const NAME_REGEX = /^[\p{L}]+(?:[ '-][\p{L}]+)*$/u;
 
   const baseURL = useMemo(() => {
 
@@ -67,6 +70,9 @@ const LoginUserName = ({ navigation }) => {
         if (!res.ok) throw new Error(data?.message || 'Не удалось начать онбординг');
 
         dispatch(setRegTokenAction(data.regToken));
+
+        // First save token from server
+        await AsyncStorage.setItem('regToken', data.regToken);
 
         if (data.user) dispatch(setUserAction(data.user));
 
