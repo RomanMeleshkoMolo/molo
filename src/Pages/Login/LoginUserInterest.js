@@ -3,68 +3,120 @@
  * Molo is a private development, and all rights are owned by the app's owner.
  */
 
-import React, { useEffect, useCallback, useState } from 'react';
-import { View } from 'react-native';
+import React, { useEffect, useCallback, useState, useMemo } from 'react';
+import { View, Alert, Platform } from 'react-native';
 
-// Connect components
-import Title from 'Components/Titles/Title';
-import SubTitle from 'Components/Titles/SubTitle';
-import PreferenceCard from 'Components/Cards/PreferenceCard';
-import ButtonNameIcon from 'Components/Buttons/ButtonNameIcon';
+// Connect Components
+import Title from "Components/Titles/Title";
+import SubTitle from "Components/Titles/SubTitle";
+import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
+import PreferenceCard from "Components/Cards/PreferenceCard";
+import ModalInfo from "Components/Modals/ModalInfo";
 
-// Connect styles
-import styles from 'LoginStyles/LoginUserInterest.scss';
+import styles from "LoginStyles/LoginUserInterest.scss";
 
-// Connect Redux
-import { useSelector } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch } from "react-redux";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from '@react-navigation/native';
+import {setRegTokenAction, setUserAction} from "redux/actions";
 
 const LAST_ROUTE_KEY = '@authFlow:lastRoute';
 
-// Варианты интересов вынесены в конфиг
 const INTEREST_OPTIONS = [
-  {
-    id: 'dates',
+  { id: 'dates',
     title: 'Пойти на свидания',
     subtitle: 'Интересные и приятные встречи, заряжают на новые цели.',
-    icon: 'wine-outline',
+    icon: 'wine-outline'
   },
-  {
-    id: 'chat',
+  { id: 'chat',
     title: 'Просто общение',
     subtitle: 'Просто общение, где легко быть собой и приятно слушать друг друга.',
-    icon: 'people-outline',
+    icon: 'people-outline'
   },
-  {
-    id: 'love',
+  { id: 'love',
     title: 'Найти любовь',
     subtitle: 'Найти любовь — это встреча, которая заставляет улыбаться каждый день.',
-    icon: 'heart-outline',
+    icon: 'heart-outline'
   },
 ];
 
-const LoginUserInterest = ({ navigation }) => {
-  const userData = useSelector((state) => state.userData);
-  const [selectedId, setSelectedId] = useState(null);
+const startPath = '/onboarding/interest';
 
-  // Один раз при загрузке страницы отмечаем, что пользователь дошёл до этапа интересов
+const LoginUserInterest = ({ navigation }) => {
+  const [token, setToken] = useState(null);
+
+  // It is for Modal window
+  const [info, setInfo] = useState('');
+  const [colorModal, setColorModal] = useState('#ffcc00');
+  const [errorUserCode, setErrorUserCode] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const [selectedTitle, setSelectedTitle] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Базовый URL под реальное устройство
+  const baseURL = useMemo(() => {
+    if (Platform.OS === 'ios') return 'http://localhost:3000';
+    return 'http://192.168.0.107:3000';
+  }, []);
+
   useEffect(() => {
     AsyncStorage.setItem('registrationUserInterest', 'true').catch(() => {});
   }, []);
 
-  // Каждый раз при фокусе экрана сохраняем его как "последний"
   useFocusEffect(
     useCallback(() => {
       AsyncStorage.setItem(LAST_ROUTE_KEY, 'LoginUserInterest').catch(() => {});
     }, [])
   );
 
+  useEffect(( token ) => {
+  const hydrate = async () => {
+    setToken( await AsyncStorage.getItem('regToken') )
+    if (token) dispatch(setRegTokenAction(token));
+  };
+  hydrate();
+}, [dispatch]);
+
   const goToNextPage = async () => {
-    // Здесь можно сохранить выбор пользователя, если нужно:
-    // await AsyncStorage.setItem('@user:interest', selectedId).catch(() => {});
-    alert(`go to page. Selected: ${selectedId}`);
-    // navigation.navigate('NextScreen'); // пример перехода
+    if (!selectedTitle) {
+      Alert.alert('Выбор не сделан', 'Пожалуйста, выберите один из вариантов, чтобы продолжить.');
+      return;
+    }
+
+
+    try {
+      setLoading(true);
+
+      const payload = { title: selectedTitle };
+
+      const response = await fetch(`${baseURL}${startPath}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token ? `Bearer ${token}` : '',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) throw new Error(data?.message || 'Не удалось сохранить интерес');
+      //
+      if (data.user) {
+        dispatch(setUserAction(data.user));
+      }
+
+      //Навигация на следующий экран
+      // navigation.navigate('NextScreen'); // заменить на реальный маршрут
+
+    } catch (error) {
+      Alert.alert('Ошибка сохранения', error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,23 +135,31 @@ const LoginUserInterest = ({ navigation }) => {
             title={opt.title}
             subtitle={opt.subtitle}
             icon={opt.icon}
-            selected={selectedId === opt.id}
-            onPress={() =>
-              setSelectedId((prev) => (prev === opt.id ? null : opt.id))
-            }
+            selected={selectedTitle === opt.title}
+            onPress={() => setSelectedTitle((prev) => (prev === opt.title ? null : opt.title))}
           />
         ))}
       </View>
 
       <View style={styles.footer}>
         <ButtonNameIcon
-          buttonText="Дальше"
-          handle={goToNextPage}
-          disable={!selectedId}
+          buttonText={loading ? 'Сохраняем...' : 'Дальше'}
+          handle={loading ? undefined : goToNextPage}
+          disable={loading || !selectedTitle}
         />
       </View>
+
+      {errorUserCode && (
+           <ModalInfo
+             message={ info }
+             backgroundColor={colorModal}
+             textColor="#000"
+             onHide={() => setErrorUserCode(false)}
+           />
+        )}
     </View>
   );
 };
 
 export default LoginUserInterest;
+
