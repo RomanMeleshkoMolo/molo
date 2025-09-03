@@ -5,10 +5,13 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, Alert, Platform } from 'react-native';
+
+// Connect Components
 import Title from "Components/Titles/Title";
 import SubTitle from "Components/Titles/SubTitle";
 import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import Input from "Components/Inputs/Input";
+import ModalInfo from "Components/Modals/ModalInfo";
 
 // Connect styles
 import styles from "LoginStyles/LoginUserName.scss";
@@ -23,12 +26,19 @@ const LoginUserName = ({ navigation }) => {
   const [isNameValid, setIsNameValid] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // It is for Modal window
+  const [info, setInfo] = useState('');
+  const [colorModal, setColorModal] = useState('#ffcc00');
+  const [errorUserCode, setErrorUserCode] = useState(false);
+
+
   const dispatch = useDispatch();
   const userData = useSelector(state => state.userData);
   const regToken = userData?.regToken;
   const email = userData?.email;     // или chatId/phone, что у вас есть
   const chatId = userData?.chatId;
 
+  // Template for Input Validation
   const NAME_REGEX = /^[\p{L}]+(?:[ '-][\p{L}]+)*$/u;
 
   const baseURL = useMemo(() => {
@@ -42,10 +52,35 @@ const LoginUserName = ({ navigation }) => {
   const startPath = '/onboarding/start'; // или '/users/onboarding/start'
   const namePath = '/onboarding/name';   // или '/users/onboarding/name'
 
+  const normalizeInput = (s) => s
+
+    .normalize('NFKC')
+    .replace(/\s+/g, ' ')
+    .replace(/[-']{2,}/g, (m) => m[0]);
+
+  const validateName = (raw) => {
+    const value = normalizeInput(raw);
+    const trimmed = value.trim();
+
+    if( trimmed.length > 30 ) {
+      setErrorUserCode(true);
+      setInfo('Слишком длинное имя!');
+    }
+
+    if (trimmed.length < 2 || trimmed.length > 30) {
+      return { valid: false, value: trimmed, reason: 'length' };
+    }
+    if (!NAME_REGEX.test(trimmed)) {
+      return { valid: false, value: trimmed, reason: 'chars' };
+    }
+    return { valid: true, value: trimmed };
+  };
+
   const handleUserNameChange = (name) => {
     setNameUser(name);
-    const trimmed = name.trim();
-    setIsNameValid(trimmed.length >= 2 && trimmed.length <= 50);
+
+    const { valid } = validateName(name);
+    setIsNameValid(valid);
   };
 
   // Гарантируем сессию при монтировании (как раньше)
@@ -139,7 +174,8 @@ const LoginUserName = ({ navigation }) => {
 
       if (data.user) dispatch(setUserAction(data.user));
 
-      navigation.navigate('LoginUserInterest');
+      // navigation.navigate('LoginUserInterest');
+      navigation.replace('LoginUserInterest');
     } catch (error) {
 
       Alert.alert('Ошибка', error.message);
@@ -158,6 +194,7 @@ const LoginUserName = ({ navigation }) => {
         style={styles.input}
         keyboardType='default'
         userName={handleUserNameChange}
+        maxLength={50}
       />
 
       <View style={styles.footer}>
@@ -167,6 +204,15 @@ const LoginUserName = ({ navigation }) => {
           disable={!isNameValid || loading}
         />
       </View>
+
+      {errorUserCode && (
+         <ModalInfo
+             message={ info }
+             backgroundColor={colorModal}
+             textColor="#000"
+             onHide={() => setErrorUserCode(false)}
+         />
+        )}
     </View>
   );
 };
