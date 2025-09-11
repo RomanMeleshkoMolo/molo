@@ -42,6 +42,7 @@ import LoginUserName from "Pages/Login/LoginUserName";
 import VerificationTelegram from "Pages/Login/VerificationTelegram";
 import LoginUserInterest from "Pages/Login/LoginUserInterest";
 import LoginUserBirthday from "Pages/Login/LoginUserBirthday";
+import LoginUserGender from "Pages/Login/LoginUserGender";
 
 import NetworkStatus from "Components/Modals/NetworkStatus";
 
@@ -168,6 +169,7 @@ const App = () => {
                        <Stack.Screen name="LoginUserName" component={LoginUserName} />
                        <Stack.Screen name="LoginUserInterest" component={LoginUserInterest} />
                        <Stack.Screen name="LoginUserBirthday" component={LoginUserBirthday} />
+                       <Stack.Screen name="LoginUserGender" component={LoginUserGender} />
                     </Stack.Navigator>
                  </NavigationContainer>
               </NetworkStatus>

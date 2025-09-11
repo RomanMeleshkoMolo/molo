@@ -1,0 +1,27 @@
+// Общие настройки
+$background-app: #d9dcd6;
+$text: #1a1a1a;
+$muted: #6b6b6b;
+$border: #e5e5e5;
+$primary: #2e2e2e;
+$inputBg: #f7f7f7;
+$radius: 12px;
+
+.container {
+  flex: 1;
+  padding: 20px;
+  background-color: $background-app;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.genderRow {
+  margin-top: 20px;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
