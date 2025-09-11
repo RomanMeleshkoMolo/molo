@@ -11,13 +11,14 @@ import Title from "Components/Titles/Title";
 import SubTitle from "Components/Titles/SubTitle";
 import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import PreferenceCard from "Components/Cards/PreferenceCard";
-import ModalInfo from "Components/Modals/ModalInfo";
 
+// Connect styles
 import styles from "LoginStyles/LoginUserInterest.scss";
 
+// Connect Redux
 import { useDispatch } from "react-redux";
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useFocusEffect } from '@react-navigation/native';
 import {setRegTokenAction, setUserAction} from "redux/actions";
 
@@ -41,15 +42,11 @@ const INTEREST_OPTIONS = [
   },
 ];
 
+// Path of end-point
 const startPath = '/onboarding/interest';
 
 const LoginUserInterest = ({ navigation }) => {
   const [token, setToken] = useState(null);
-
-  // It is for Modal window
-  const [info, setInfo] = useState('');
-  const [colorModal, setColorModal] = useState('#ffcc00');
-  const [errorUserCode, setErrorUserCode] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -110,7 +107,7 @@ const LoginUserInterest = ({ navigation }) => {
       }
 
       //Навигация на следующий экран
-      // navigation.navigate('NextScreen'); // заменить на реальный маршрут
+      navigation.replace('LoginUserBirthday');
 
     } catch (error) {
       Alert.alert('Ошибка сохранения', error.message);
@@ -149,17 +146,8 @@ const LoginUserInterest = ({ navigation }) => {
         />
       </View>
 
-      {errorUserCode && (
-           <ModalInfo
-             message={ info }
-             backgroundColor={colorModal}
-             textColor="#000"
-             onHide={() => setErrorUserCode(false)}
-           />
-        )}
     </View>
   );
 };
 
 export default LoginUserInterest;
-

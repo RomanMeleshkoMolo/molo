@@ -20,7 +20,8 @@ import { enableScreens } from 'react-native-screens';
 
 // Connect store from redux
 import { Provider } from 'react-redux';
-import store from 'redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from 'redux/store';
 
 // It is old Pages
 import Phone from "./src/Pages/Phone";
@@ -40,6 +41,7 @@ import VerificationPhone from "Pages/Login/VerificationPhone";
 import LoginUserName from "Pages/Login/LoginUserName";
 import VerificationTelegram from "Pages/Login/VerificationTelegram";
 import LoginUserInterest from "Pages/Login/LoginUserInterest";
+import LoginUserBirthday from "Pages/Login/LoginUserBirthday";
 
 import NetworkStatus from "Components/Modals/NetworkStatus";
 
@@ -144,31 +146,34 @@ const App = () => {
   }
 
   return (
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <NetworkStatus style={{ margin: 50 }}>
-          <NavigationContainer ref={navigationRef} onStateChange={handleNavStateChange}>
-            <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Phone" component={Phone} />
-              <Stack.Screen name="MainNavi" component={MainNavi} options={{ title: "" }} />
-              <Stack.Screen name="Account" component={Account} />
-              <Stack.Screen name="Information" component={Information} />
-              <Stack.Screen name="UserConditionInfo" component={UserConditionInfo} />
-              <Stack.Screen name="UserPoliticoInfo" component={UserPoliticoInfo} />
-              <Stack.Screen name="LoginEmail" component={LoginEmail} />
-              <Stack.Screen name="LoginPhone" component={LoginPhone} />
-              <Stack.Screen name="CountryCodeSelector" component={CountryCodeSelector} />
-              <Stack.Screen name="VerificationEmail" component={VerificationEmail} />
-              <Stack.Screen name="VerificationPhone" component={VerificationPhone} />
-              <Stack.Screen name="VerificationTelegram" component={VerificationTelegram} />
-              <Stack.Screen name="LoginUserName" component={LoginUserName} />
-              <Stack.Screen name="LoginUserInterest" component={LoginUserInterest} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </NetworkStatus>
-      </SafeAreaProvider>
-    </Provider>
+     <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+           <SafeAreaProvider>
+              <NetworkStatus style={{ margin: 50 }}>
+                 <NavigationContainer ref={navigationRef} onStateChange={handleNavStateChange}>
+                    <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+                       <Stack.Screen name="Login" component={Login} />
+                       <Stack.Screen name="Phone" component={Phone} />
+                       <Stack.Screen name="MainNavi" component={MainNavi} options={{ title: "" }} />
+                       <Stack.Screen name="Account" component={Account} />
+                       <Stack.Screen name="Information" component={Information} />
+                       <Stack.Screen name="UserConditionInfo" component={UserConditionInfo} />
+                       <Stack.Screen name="UserPoliticoInfo" component={UserPoliticoInfo} />
+                       <Stack.Screen name="LoginEmail" component={LoginEmail} />
+                       <Stack.Screen name="LoginPhone" component={LoginPhone} />
+                       <Stack.Screen name="CountryCodeSelector" component={CountryCodeSelector} />
+                       <Stack.Screen name="VerificationEmail" component={VerificationEmail} />
+                       <Stack.Screen name="VerificationPhone" component={VerificationPhone} />
+                       <Stack.Screen name="VerificationTelegram" component={VerificationTelegram} />
+                       <Stack.Screen name="LoginUserName" component={LoginUserName} />
+                       <Stack.Screen name="LoginUserInterest" component={LoginUserInterest} />
+                       <Stack.Screen name="LoginUserBirthday" component={LoginUserBirthday} />
+                    </Stack.Navigator>
+                 </NavigationContainer>
+              </NetworkStatus>
+           </SafeAreaProvider>
+        </PersistGate>
+     </Provider>
   );
 };
 

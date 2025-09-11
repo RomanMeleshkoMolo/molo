@@ -195,6 +195,7 @@ const LoginUserName = ({ navigation }) => {
         keyboardType='default'
         userName={handleUserNameChange}
         maxLength={50}
+        autoFocus={true}
       />
 
       <View style={styles.footer}>
