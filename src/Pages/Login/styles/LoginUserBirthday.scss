@@ -1,0 +1,116 @@
+// Общие настройки
+$background-app: #d9dcd6;
+$text: #1a1a1a;
+$muted: #6b6b6b;
+$border: #e5e5e5;
+$primary: #2e2e2e;
+$inputBg: #f7f7f7;
+$radius: 12px;
+
+.container {
+  flex: 1;
+  padding: 20px;
+  background-color: $background-app;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.title {
+  font-family: 'System';
+  font-weight: 700;
+  font-size: 28px;
+  color: $text;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-family: 'System';
+  font-size: 14px;
+  color: $muted;
+  margin-bottom: 20px;
+}
+
+.inputRow {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-horizontal: 6px;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+.inputGroup {
+  flex: 1;
+  min-width: 0;
+  margin: 0 6px;
+  align-items: stretch;
+}
+
+.label {
+  font-size: 12px;
+  color: $muted;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.input {
+  height: 48px;
+  border-radius: $radius;
+  border: 1px solid $border;
+  background-color: $inputBg;
+  padding-horizontal: 12px;
+  font-size: 16px;
+  color: $text;
+  text-align: center;
+}
+
+.infoRow {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-vertical: 8px;
+  padding-horizontal: 6px;
+  margin-top: 6px;
+  border-top: 1px solid $border;
+  border-bottom: 1px solid transparent;
+}
+
+.infoText {
+  font-size: 14px;
+  color: $text;
+}
+
+.infoDate {
+  font-size: 14px;
+  color: $muted;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.datePickerRow {
+  margin-bottom: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.datePickerButton {
+  height: 48px;
+  padding-horizontal: 14px;
+  border-radius: $radius;
+  background-color: $inputBg;
+  border: 1px solid $border;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+}
+
+.datePickerText {
+  font-size: 16px;
+  color: $text;
+}
