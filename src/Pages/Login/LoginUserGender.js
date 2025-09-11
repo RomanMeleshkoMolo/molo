@@ -1,180 +1,15 @@
-// /**
-//  * © [2025] Molo. All rights reserved.
-//  * Molo is a private development, and all rights are owned by the app's owner.
-//  */
-//
-// import React, { useEffect, useCallback, useMemo, useState, useRef } from 'react';
-// import { View, Alert, Platform, Text, } from 'react-native';
-//
-// // Connect Redux
-// import { useDispatch } from "react-redux";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-//
-// import { useFocusEffect } from '@react-navigation/native';
-// import { setRegTokenAction, setUserAction } from "redux/actions";
-//
-// // Connect Components
-// import Title from "Components/Titles/Title";
-// import SubTitle from "Components/Titles/SubTitle";
-// import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
-// import ModalInfo from "Components/Modals/ModalInfo";
-//
-// // Connect styles
-// import styles from "LoginStyles/LoginUserGender.scss";
-// import TitleWithIcon from "Components/Titles/TitleWithIcon";
-//
-// // Flag for last Page
-// const LAST_ROUTE_KEY = '@authFlow:lastRoute';
-//
-// // Path to end-point at server
-// const startPath = '/onboarding/birthday';
-//
-//
-// const LoginUserGender = ({ navigation }) => {
-//   const dispatch = useDispatch();
-//
-//   // Токен и флаги загрузки
-//   const [token, setToken] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//
-//    // It is for Modal window
-//   const [info, setInfo] = useState('');
-//   const [colorModal, setColorModal] = useState('#ffcc00');
-//   const [errorUserCode, setErrorUserCode] = useState(false);
-//
-//   // Базовый URL
-//   const baseURL = useMemo(() => {
-//     if (Platform.OS === 'ios') return 'http://localhost:3000';
-//     return 'http://192.168.0.107:3000';
-//   }, []);
-//
-//   // Метаданные локального стора
-//   useEffect(() => {
-//     AsyncStorage.setItem('registrationUserGender', 'true').catch(() => {});
-//   }, []);
-//
-//   useFocusEffect(
-//     useCallback(() => {
-//       AsyncStorage.setItem(LAST_ROUTE_KEY, 'LoginUserGender').catch(() => {});
-//     }, [])
-//   );
-//
-//   // Хранение токена
-//   useEffect(( token ) => {
-//     const hydrate = async () => {
-//       setToken( await AsyncStorage.getItem('regToken') );
-//       if (token) dispatch(setRegTokenAction(token));
-//     };
-//     hydrate();
-//   }, [dispatch]);
-//
-//
-//   // Отправка payload
-//   const goToNextPage = async () => {
-//
-//     try {
-//       setLoading(true);
-//
-//       const payload = {
-//         // birthDate: birthDateISO.split('T')[0], // 'YYYY-MM-DD' (ISO)
-//         // birthDateParts,
-//         // age,
-//       };
-//
-//       const response = await fetch(`${baseURL}${startPath}`, {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': token ? `Bearer ${token}` : '',
-//         },
-//         body: JSON.stringify(payload),
-//       });
-//
-//       const data = await response.json().catch(() => ({}));
-//       if (!response.ok) {
-//
-//         setErrorUserCode(true);
-//         setInfo('Не удалось сохранить выбранный гендер');
-//
-//       }
-//
-//       if (data.user) {
-//         dispatch(setUserAction(data.user));
-//       }
-//
-//       // navigation.navigate('NextScreen'); // замени на реальный маршрут
-//     } catch (error) {
-//
-//       setErrorUserCode(true);
-//       setInfo( error.message );
-//
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-//
-//   // Визуальные элементы и структура
-//   return (
-//      <View style={styles.container}>
-//         <Title>Супер! Теперь выбери свой гендер</Title>
-//
-//         <SubTitle>
-//           Укажи свой гендер который соответствует твоему полу.
-//         </SubTitle>
-//
-//
-//         <ButtonNameIcon
-//           buttonText={'Мужской'}
-//         />
-//
-//         <ButtonNameIcon
-//           buttonText={'Женский'}
-//         />
-//
-//
-//
-//         <View style={styles.footer}>
-//            <TitleWithIcon nameIcon="lock-closed-outline">
-//               Этот выбор ты сможешь изменить у себя в профиле
-//            </TitleWithIcon>
-//
-//            <ButtonNameIcon
-//               buttonText={loading ? 'Сохраняем...' : 'Дальше'}
-//               handle={loading ? undefined : goToNextPage}
-//               // disable={}
-//            />
-//         </View>
-//
-//         {errorUserCode && (
-//            <ModalInfo
-//               message={ info }
-//               backgroundColor={colorModal}
-//               textColor="#000"
-//               onHide={() => setErrorUserCode(false)}
-//            />
-//         )}
-//
-//      </View>
-//   );
-// };
-//
-// export default LoginUserGender;
-
-
-
-
-
-
-import React, { useEffect, useCallback, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Platform } from 'react-native';
+
 // Redux
 import { useDispatch } from 'react-redux';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// Навигация
-// import { useFocusEffect } from '@react-navigation/native'; // если используете, раскомментируйте
+
+// Navigate
+// import { useFocusEffect } from '@react-navigation/native';
 import { setRegTokenAction, setUserAction } from "redux/actions";
 
-// Ваши локальные UI-компоненты
+// Connect Components
 import ButtonNameIcon from "Components/Buttons/ButtonNameIcon";
 import ModalInfo from "Components/Modals/ModalInfo";
 import Title from "Components/Titles/Title";
@@ -260,8 +95,8 @@ const LoginUserGender = ({ navigation }) => {
         dispatch(setUserAction(data.user));
       }
 
-      // navigation к следующему экрану (замените на ваш маршрут)
-      // navigation.navigate('LoginUserBirthday');
+
+      navigation.replace('LoginUserWish');
     } catch (error) {
       setErrorUserCode(true);
       setInfo(error.message);
