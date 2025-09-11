@@ -22,6 +22,7 @@ import ModalInfo from "Components/Modals/ModalInfo";
 
 // Connect styles
 import styles from "LoginStyles/LoginUserBirthday.scss";
+import TitleWithIcon from "Components/Titles/TitleWithIcon";
 
 // Flag for last Page
 const LAST_ROUTE_KEY = '@authFlow:lastRoute';
@@ -213,7 +214,7 @@ const LoginUserBirthday = ({ navigation }) => {
         dispatch(setUserAction(data.user));
       }
 
-      // navigation.navigate('NextScreen'); // замени на реальный маршрут
+      navigation.replace('LoginUserGender'); // замени на реальный маршрут
     } catch (error) {
 
       setErrorUserCode(true);
@@ -281,6 +282,10 @@ const LoginUserBirthday = ({ navigation }) => {
 
 
         <View style={styles.footer}>
+           <TitleWithIcon nameIcon="lock-closed-outline">
+              Мы никому не передаем твои введенные данные и не используем в других целях. Ваша безопасность превыше всего!
+           </TitleWithIcon>
+
            <ButtonNameIcon
               buttonText={loading ? 'Сохраняем...' : 'Дальше'}
               handle={loading ? undefined : goToNextPage}
