@@ -153,7 +153,16 @@ const App = () => {
            <SafeAreaProvider>
               <NetworkStatus style={{ margin: 50 }}>
                  <NavigationContainer ref={navigationRef} onStateChange={handleNavStateChange}>
-                    <Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+                    <Stack.Navigator initialRouteName={initialRoute} screenOptions={{
+                         headerShown: false,
+                         animation: 'slide_from_right', // push-анима “выталкивания”
+                         animationTypeForReplace: 'push', // при replace — тоже push-анима
+                         gestureEnabled: true, // свайп-назад на iOS
+                         fullScreenSwipeEnabled: true, // полноэкранный свайп-назад (iOS)
+                         // presentation: 'card', // по умолчанию “card”, оставим явно
+                         }}
+                       >
+
                        <Stack.Screen name="Login" component={Login} />
                        <Stack.Screen name="Phone" component={Phone} />
                        <Stack.Screen name="MainNavi" component={MainNavi} options={{ title: "" }} />
