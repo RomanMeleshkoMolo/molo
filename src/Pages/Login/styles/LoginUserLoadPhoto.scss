@@ -1,0 +1,135 @@
+$background-app: #d9dcd6;
+$padding-horizontal: 20px;
+$padding-vertical: 20px;
+
+$primary: #6c5ce7;
+$muted: #666;
+$border: #e5e5ea;
+$danger: #ff3b30;
+$bgCard: #fafafa;
+
+.container {
+  display: flex;
+  flex: 1;
+  padding: $padding-vertical $padding-horizontal;
+  background-color: $background-app;
+}
+.content {
+  margin-top: 12px;
+}
+
+.progressBar {
+  margin: $padding-vertical;
+  width: 100%;
+  background: #edede9;
+  z-index: 99;
+  padding: 15px;
+  border-radius: 20px;
+  position: absolute;
+}
+
+.grid {
+  margin-top: 16px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.addCard {
+  width: 48%;
+  border-radius: 12px;
+  border-width: 1px;
+  border-color: $border;
+  background-color: $bgCard;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 12px;
+  margin-bottom: 12px;
+
+  aspect-ratio: 1 / 1;
+}
+
+.addPlus {
+  font-size: 34px;
+  color: $primary;
+  line-height: 40px;
+}
+
+.addText {
+  margin-top: 6px;
+  font-size: 12px;
+  color: $muted;
+}
+
+.cancelBtn {
+  margin-top: 10px;
+  align-self: flex-end;
+  padding: 13px;
+  background-color: $bgCard;
+  border-radius: 20px;
+}
+
+.photoItem {
+  width: 48%;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #000;
+
+  margin-right: 12px;
+  margin-bottom: 12px;
+
+  position: relative;
+
+  aspect-ratio: 1 / 1;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  background-color: rgba(0, 0, 0, 0.55);
+  padding-vertical: 4px;
+  padding-horizontal: 8px;
+  border-radius: 10px;
+}
+
+.removeText {
+  color: #fff;
+  font-size: 11px;
+}
+
+.counterRow {
+  margin-bottom: 8px;
+}
+
+.counterText {
+  font-size: 12px;
+  color: #666;
+}
+
+// Сам ScrollView для сетки
+.gridScroll {
+  flex-grow: 0;
+  margin-bottom: 15px;
+}
+
+// Контейнер элементов в сетке
+.gridContent {
+  flex-direction: row;
+  flex-wrap: wrap;
+
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}

@@ -107,7 +107,7 @@ const LoginUserWish = ({ navigation }) => {
         dispatch(setUserAction(data.user));
       }
 
-      // navigation.replace('LoginUserBirthday');
+      navigation.replace('LoginUserLoadPhoto');
 
     } catch (error) {
       Alert.alert('Ошибка сохранения', error.message);

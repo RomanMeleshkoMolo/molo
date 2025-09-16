@@ -4,6 +4,20 @@
 <dict>
 	<key>NSContactsUsageDescription</key>
 	<string>Мы используем ваши контакты для отображения списка контактов.</string>
+
+	<!-- ДОБАВЛЕНО: разрешения для камеры и галереи -->
+	<key>NSCameraUsageDescription</key>
+	<string>Нужен доступ к камере для съемки фото вашего профиля.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Нужен доступ к фотогалерее для выбора ваших фотографий.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Нужно разрешение для сохранения сделанных фото в вашу библиотеку.</string>
+	<!-- Если будете записывать видео со звуком, добавьте: -->
+	<!--
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Нужен доступ к микрофону для записи звука при съемке видео.</string>
+	-->
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
