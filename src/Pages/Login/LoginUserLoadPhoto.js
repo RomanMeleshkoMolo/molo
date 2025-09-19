@@ -88,9 +88,6 @@ const LoginUserLoadPhoto = ({ navigation }) => {
   }, []);
 
 
-  // function UploadScreen() {
-  //   const navigation = useNavigation();
-
   useEffect(() => {
     let mounted = true;
 
@@ -101,9 +98,9 @@ const LoginUserLoadPhoto = ({ navigation }) => {
         const flag = await AsyncStorage.getItem(PHOTOS_UPLOADED_KEY);
         if (mounted && flag === 'true') {
           // Фото уже были загружены ранее — перенаправляем
-          // navigation.replace('NextScreen'); // замените на ваш реальный экран
+          navigation.replace('LoginUserLocation'); // замените на ваш реальный экран
 
-          Alert.alert("Go to next Page");
+          // Alert.alert("Go to next Page");
 
           // return;
         }
@@ -114,11 +111,6 @@ const LoginUserLoadPhoto = ({ navigation }) => {
 
     return () => { mounted = false; };
   }, [navigation]);
-
-  //   // ... ваш UI экрана загрузки
-  // }
-  //
-  // UploadScreen();
 
 
   const markPhotosUploaded = () =>
@@ -244,7 +236,9 @@ const LoginUserLoadPhoto = ({ navigation }) => {
 
 
   const processPickerResult = async (result) => {
+
     if (result?.didCancel) return;
+
     if (result?.errorCode) {
       showError(result.errorMessage || 'Не удалось выбрать фото');
       return;
@@ -318,10 +312,13 @@ const LoginUserLoadPhoto = ({ navigation }) => {
   };
 
 
+  // New uploadPhotos
   const uploadPhotos = () => {
+
     if (!photos.length) {
       return Promise.reject(new Error('Нет фото для загрузки'));
     }
+
     if (isUploadingRef.current) {
       return Promise.reject(new Error('Загрузка уже выполняется'));
     }
@@ -330,102 +327,122 @@ const LoginUserLoadPhoto = ({ navigation }) => {
     settledRef.current = false;
 
     const finish = (cb) => {
+
       if (settledRef.current) return;
-      settledRef.current = true;
-      isUploadingRef.current = false;
-      xhrRef.current = null;
-      cb && cb();
+        settledRef.current = true;
+        isUploadingRef.current = false;
+        xhrRef.current = null;
+        cb && cb();
     };
 
-    return new Promise((resolve, reject) => {
+  // Новый подход:
+  // 1) для каждого файла получить presigned URL
+  // 2) загрузить файл напрямую в S3 через PUT
+  // 3) отправить метаданные в бэкенд
+  // Прогресс: общий прогресс по количеству файлов + прогресс внутри загрузки файла (минимальная версия)
+
+  return new Promise((resolve, reject) => {
+    (async () => {
       try {
-        const xhr = new XMLHttpRequest();
-        xhrRef.current = xhr;
+        const total = photos.length;
+        let completed = 0;
 
-        xhr.upload.onprogress = (event) => {
-          if (event.lengthComputable) {
-            const frac = event.total ? event.loaded / event.total : 0;
-            setOverallProgress(frac);
+        // Список метаданных для бэкенда
+        const uploadedMeta = [];
+
+        for (let i = 0; i < photos.length; i++) {
+          const p = photos[i];
+          // 1) получить presigned URL
+          const presignedRes = await fetch(
+            `${baseURL}/storage/presigned-upload?filename=${encodeURIComponent(p.name)}&contentType=${encodeURIComponent(p.type)}`,
+            {
+              headers: token ? { 'Authorization': `Bearer ${token}` } : undefined,
+            }
+          );
+          if (!presignedRes.ok) {
+            throw new Error('Не удалось получить presigned URL');
           }
-        };
+          const presigned = await presignedRes.json(); // { url, key }
 
-        xhr.onerror = () => {
-          const message = 'Не удалось загрузить фото (ошибка сети)';
-          finish(() => {
-            markAllQueuedOrUploadingAsError(message);
-            reject(new Error(message));
+          // Опционально: показать прогресс получения presigned URL
+          // можно обновлять общий прогресс, но это не сильно влияет.
+
+          // 2) загрузка на S3 напрямую
+          const fileBlob = await fetch(p.uri).then(r => r.blob());
+
+          // Используем PUT для прямой загрузки в S3
+          const uploadRes = await fetch(presigned.url, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': p.type,
+            },
+            body: fileBlob,
           });
-        };
 
-        xhr.timeout = 30000;
-        xhr.ontimeout = () => {
-          const message = 'Не удалось загрузить фото (таймаут)';
-          finish(() => {
-            markAllQueuedOrUploadingAsError(message);
-            reject(new Error(message));
-          });
-        };
+          if (!uploadRes.ok) {
+            // throw new Error('Не удалось загрузить фото в S3');
 
-        xhr.onreadystatechange = () => {
-          if (xhr.readyState !== 4) return;
-
-          if (xhr.status >= 200 && xhr.status < 300) {
-            finish(async () => {
-              try {
-                const data = JSON.parse(xhr.responseText || '{}');
-                setPhotos(prev => prev.map(p => ({ ...p, status: 'done', progress: 1 })));
-
-                // Флаг УСПЕШНОЙ загрузки
-                await markPhotosUploaded();
-
-                if (data?.user) {
-                  dispatch(setUserAction(data.user));
-                }
-                resolve(data);
-              } catch {
-                setPhotos(prev => prev.map(p => ({ ...p, status: 'done', progress: 1 })));
-                // Ответ всё равно 2xx — ставим флаг
-                await markPhotosUploaded();
-                resolve({});
-              }
-            });
-          } else {
-            // ВАЖНО: message должен быть синхронной строкой, а не Promise
-            const parseMessage = () => {
-              try {
-                const parsed = JSON.parse(xhr.responseText || '{}');
-                return parsed?.message || 'Не удалось загрузить фото';
-              } catch {
-                return 'Не удалось загрузить фото';
-              }
-            };
-            const message = parseMessage();
-
-            finish(async () => {
-              // Если вам нужно сбрасывать флаг при каждой неудачной загрузке — раскомментируйте:
-              await clearPhotosUploaded();
-
-              markAllQueuedOrUploadingAsError(message);
-              reject(new Error(message));
-            });
+             const text = await uploadRes.text().catch(() => '');
+              console.error('S3 upload failed', {
+                status: uploadRes.status,
+                statusText: uploadRes.statusText,
+                body: text
+              });
+              throw new Error(`Не удалось загрузить фото в S3 (status ${uploadRes.status})`);
           }
-        };
 
-        const url = `${baseURL}${uploadPath}`;
-        xhr.open('POST', url);
+          // 3) готовим метаданные для бэкенда
+          uploadedMeta.push({
+            key: presigned.key,
+            filename: p.name,
+            mimeType: p.type,
+            size: p.size,
+          });
 
-        if (token) {
-          xhr.setRequestHeader('Authorization', `Bearer ${token}`);
+          // Обновляем прогресс по файлу
+          completed += 1;
+          const frac = total > 0 ? completed / total : 0;
+          setOverallProgress(frac);
+          // Можно дополнительно пометить загрузку текущего файла как "done"
+          setPhotos(prev => prev.map((pp, idx) => idx === i ? { ...pp, status: 'done', progress: 1 } : pp));
         }
 
-        const form = buildFormData();
-        xhr.send(form);
-      } catch (err) {
-        finish(() => reject(err));
-      }
-    });
-  };
+        // 4) отправка метаданных на бекенд
+        const res = await fetch(`${baseURL}/onboarding/photos`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({ photos: uploadedMeta }),
+        });
 
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.message || 'Failed to save photo metadata');
+
+        // Успешно: обновляем состояние
+        setPhotos(prev => prev.map(p => ({ ...p, status: 'done', progress: 1 })));
+
+        // Флаг УСПЕШНОЙ загрузки
+        await markPhotosUploaded();
+
+        if (data?.user) {
+          dispatch(setUserAction(data.user));
+        }
+
+        resolve(data);
+      } catch (err) {
+        // Ошибка: пометим как error и дернем обработку
+        setPhotos(prev => prev.map((p) => ({ ...p, status: 'error' })));
+        await clearPhotosUploaded();
+        const message = err?.message || 'Не удалось загрузить фото';
+        reject(new Error(message));
+      } finally {
+        finish();
+      }
+    })();
+  });
+};
 
 
   const cancelUpload = () => {
@@ -466,7 +483,7 @@ const LoginUserLoadPhoto = ({ navigation }) => {
     if (isUploading) return;
 
     // В случае успеха
-    // navigation.replace('LoginUserWish');
+    navigation.replace('LoginUserLocation');
 
   };
 

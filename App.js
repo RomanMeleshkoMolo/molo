@@ -45,6 +45,7 @@ import LoginUserBirthday from "Pages/Login/LoginUserBirthday";
 import LoginUserGender from "Pages/Login/LoginUserGender";
 import LoginUserWish from "Pages/Login/LoginUserWish";
 import LoginUserLoadPhoto from "Pages/Login/LoginUserLoadPhoto";
+import LoginUserLocation from "Pages/Login/LoginUserLocation";
 
 import NetworkStatus from "Components/Modals/NetworkStatus";
 
@@ -183,6 +184,7 @@ const App = () => {
                        <Stack.Screen name="LoginUserGender" component={LoginUserGender} />
                        <Stack.Screen name="LoginUserWish" component={LoginUserWish} />
                        <Stack.Screen name="LoginUserLoadPhoto" component={LoginUserLoadPhoto} />
+                       <Stack.Screen name="LoginUserLocation" component={LoginUserLocation} />
                     </Stack.Navigator>
                  </NavigationContainer>
               </NetworkStatus>
